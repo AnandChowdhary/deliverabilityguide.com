@@ -1,38 +1,48 @@
 # 📧 [FirstQuadrant](https://firstquadrant.ai?utm_source=github&utm_medium=readme&utm_campaign=email-deliverability-checklist) Email Deliverability Checklist
 
+**This aims to be the world's most comprehensive email deliverability checklist.** _(Work in progress!)_
+
+If you're sending outbound emails, you should follow this checklist to ensure that your emails are delivered to the inbox and not marked as spam.
+
+This checklist is based on the experience of sending tons of of outbound emails, and is used by FirstQuadrant to ensure that our customers have the highest deliverability rate possible. Contributions are welcome!
+
 ## Checklist
 
-- [x] [Custom domains and mailboxes](custom-domains-and-mailboxes)
-  - [x] [Additional domains](additional-domains)
-    - [x] [DNS records](dns-records)
-  - [x] [Mailboxes](mailboxes)
-    - [x] [Mailbox providers](mailbox-providers)
-    - [x] [Active and backup mailboxes](active-and-backup-mailboxes)
-    - [x] [Sending limits](sending-limits)
-  - [x] [Rotating mailboxes](rotating-mailboxes)
-- [x] [Email warming](email-warming)
-  - [x] [Golden rule: Always keep warming](golden-rule-always-keep-warming)
-  - [x] [For new mailboxes](for-new-mailboxes)
-  - [x] [Randomization is important](randomization-is-important)
-  - [x] [After ramping up](after-ramping-up)
-- [x] [Body content](body-content)
-  - [x] [Personalize the messaging](personalize-the-messaging)
-  - [x] [Randomize the body content](randomize-the-body-content)
-  - [x] [What not to include](what-not-to-include)
-    - [x] [Spammy words](spammy-words)
-    - [x] [Images](images)
-    - [x] [Links](links)
-    - [x] [Attachments](attachments)
-  - [x] [Opt-out and unsubscribe](opt-out-and-unsubscribe)
-  - [x] [Subject line](subject-line)
-- [x] [Open and click tracking](open-and-click-tracking)
-- [x] [Right people, right time](right-people-right-time)
-  - [x] [Targeting](targeting)
-    - [x] [Buying intent](buying-intent)
-  - [x] [Scheduling](scheduling)
-    - [x] [Days and timezones](days-and-timezones)
-    - [x] [Randomization](randomization)
-- [x] [Key metrics](key-metrics)
+- [x] [Custom domains and mailboxes](#custom-domains-and-mailboxes)
+  - [x] [Additional domains](#additional-domains)
+    - [x] [DNS records](#dns-records)
+      - [x] [SPF](#spf)
+      - [x] [DKIM](#dkim)
+      - [x] [DMARC](#dmarc)
+      - [x] [Other records](#other-records)
+    - [x] [Redirects](#redirects)
+  - [x] [Mailboxes](#mailboxes)
+    - [x] [Mailbox providers](#mailbox-providers)
+    - [x] [Rotating mailboxes](#rotating-mailboxes)
+    - [x] [Sending limits](#sending-limits)
+- [x] [Email warming](#email-warming)
+  - [x] [Golden rule: Always keep warming](#golden-rule-always-keep-warming)
+  - [x] [For new mailboxes](#for-new-mailboxes)
+  - [x] [Randomization is important](#randomization-is-important)
+  - [x] [After ramping up](#after-ramping-up)
+- [x] [Body content](#body-content)
+  - [x] [Personalize the messaging](#personalize-the-messaging)
+  - [x] [Randomize the body content](#randomize-the-body-content)
+  - [x] [What not to include](#what-not-to-include)
+    - [x] [Spammy words](#spammy-words)
+    - [x] [Images](#images)
+    - [x] [Links](#links)
+    - [x] [Attachments](#attachments)
+  - [x] [Opt-out and unsubscribe](#opt-out-and-unsubscribe)
+  - [x] [Subject line](#subject-line)
+- [x] [Open and click tracking](#open-and-click-tracking)
+- [x] [Right people, right time](#right-people-right-time)
+  - [x] [Targeting](#targeting)
+    - [x] [Buying intent](#buying-intent)
+  - [x] [Scheduling](#scheduling)
+    - [x] [Days and timezones](#days-and-timezones)
+    - [x] [Randomization](#randomization)
+- [x] [Key metrics](#key-metrics)
 - [ ] [Too much to do?](#too-much-to-do)
 
 ## Custom domains and mailboxes
@@ -41,33 +51,93 @@ _Coming soon_
 
 ### Additional domains
 
-_Coming soon_
+> **tl;dr:** Use separate domains for outbound, ideally buy a few .com domains using your brand name.
+
+You should not use your primary domain to send outbound, or for anything with high volume and potential for reputation damage. Instead, you should use separate domains for outbound. This is because if your primary domain is flagged as spam, it will affect your entire business, and you will have to spend a lot of time and effort to get it unflagged. If you use a separate domain for outbound, you can simply stop using it and switch to a new domain.
+
+It's recommended to purchase one or more .com domains (don't use other TLDs, especially not free ones) using your brand name. For example, if your primary domain is example.com, you can purchase examplehq.com and getexample.com as additional domains, or more specific to your line of business, for example cleverclipvideos.com.
 
 #### DNS records
 
-_Coming soon_
+> **tl;dr:** Set up SPF, DKIM, and strict DMARC records for each of your additional domains.
+
+It's extremely important to set up your DNS records correctly, as this is the first thing mailbox providers check when determining whether an email is spam or not. You should set up the following DNS records for each of your additional domains.
+
+##### SPF
+
+The Sender Policy Framework (SPF) is a DNS record that specifies which mail servers are allowed to send email on behalf of your domain. It's recommended to use a tool to generate your SPF records or use standard ones provided by your mailbox provider. For example, if you're using Google Workspace, your SPF record will look like this:
+
+```
+v=spf1 include:_spf.google.com ~all
+```
+
+In the above example, `_spf.google.com` is a standard SPF record provided by Google Workspace, and `~all` means that if the email is not sent from one of the servers specified in the SPF record, it should be soft-failed, i.e., marked as spam but still delivered to the inbox. Other options are `-all` (hard-fail, i.e., marked as spam and not delivered to the inbox), `?all` (neutral, i.e., not marked as spam), and `+all` (allow all servers to send email on behalf of your domain, i.e., not marked as spam). It's recommended to use `~all` or `-all` as your SPF record, and only include servers that you're using to send email.
+
+##### DKIM
+
+The DomainKeys Identified Mail (DKIM) is a DNS record that allows the recipient to verify that an email was sent and authorized by the owner of that domain. It's recommended to use the standard DKIM record provided by your mailbox provider. For example, if you're using Google Workspace, you can generate a DKIM record in the Google Admin console and add it to your DNS records.
+
+##### DMARC
+
+The Domain-based Message Authentication, Reporting, and Conformance (DMARC) is a DNS record that specifies how mailbox providers should handle emails that fail SPF or DKIM checks. An example DMARC record is:
+
+```
+v=DMARC1; p=reject; rua=mailto:rua@example.com; ruf=mailto:ruf@example.com
+```
+
+In the above example, `p=reject` means that if an email fails SPF or DKIM checks, it should be rejected, i.e., marked as spam and not delivered to the inbox. Other options are `p=quarantine` (soft-fail, i.e., marked as spam but still delivered to the inbox) and `p=none` (no action taken, i.e., not marked as spam). It's recommended to use `p=reject` as your DMARC record to ensure that only emails sent from your authorized servers are delivered to the inbox after testing that your SPF and DKIM records are set up correctly. If you're unsure about your configuration, you can use `p=quarantine` in the beginning to ensure that emails are still delivered and then switch to `p=reject` after testing.
+
+You should also specify a `rua` and `ruf` email address to receive reports about emails that fail SPF or DKIM checks. These reports are sent by mailbox providers to the specified email address, and can be used to debug any issues with your SPF and DKIM records. It's recommended to use a separate email address for this purpose, and not your primary email address; it's easiest to use a third-party hosted service that provides this functionality.
+
+##### Other records
+
+You can additionally set up additional DNS records such as BIMI, MTA-STS, and TLS-RPT, but these are not necessary and can be set up later if you wish to. BIMI in particular is an interesting candidate, as it allows you to specify a logo that will be displayed next to your emails in the inbox, but it's not widely supported yet and can be very expensive to set up, especially for a large number of domains. In general, you should be good to go with strict DMARC using properly set SPF and DKIM records.
+
+#### Redirects
+
+> **tl;dr:** Use a HTTP 301 redirect from your additional domains to your primary domain, and ideally include UTM parameters and a wildcard redirect.
+
+It's recommended to use a HTTP 301 redirect from your additional domains to your primary domain. This is because if you use a separate domain for outbound, you will likely want to redirect recipients to your primary domain when they click on a link in your email or types the address manually. For example, if you're sending an email from user@exampleapp.com and the recipient goes to exampleapp.com (email clients such as Superhuman make this very easy), they should be redirected to example.com.
+
+You can additionally set up UTM parameters when redirecting your additional domains to your primary domain to track where the traffic is coming from. For example, if you're sending an email from user@exampleapp.com and the recipient goes to exampleapp.com, you can redirect them to example.com/?utm_source=exampleapp.com&utm_medium=email&utm_campaign=outbound-domain-redirect. This way, you can track how many people are visiting your primary domain from your additional domains, and how many of them are converting.
+
+Ideally, you should also include a wildcard redirect so that all pages on your primary domain also work on your additional domains. For example, exampleapp.com/pricing should redirect to example.com/pricing. This way, you can use the standard links on your website in your outbound emails, and they will work on your additional domains as well, with the exception of using the additional domain in the URL instead of the primary domain.
 
 ### Mailboxes
 
-_Coming soon_
+We recommend using a trusted mailbox provider like Google Workspace on your additional domains and setting up a few mailboxes for each domain while strictly enforcing a maximum number of emails sent per day per mailbox and having backup mailboxes.
 
 #### Mailbox providers
 
-_Coming soon_
+> **tl;dr:** Use Google Workspace on your additional domains, and Microsoft 365 for enterprises.
 
-#### Active and backup mailboxes
+There are many mailbox providers and enthusiasts can host their own mail servers, but the most popular ones are Google and Microsoft. It's not recommended to use your own mail server, as it's very difficult to set up and maintain, and you will likely have a low deliverability rate because of limited IP address reputation. Instead, you should use a third-party mailbox provider, such as Google Workspace or Microsoft 365, which are both very easy to set up and maintain, and have a high deliverability rate because of their high IP address reputation. Note that this is limited to using their paid business email offerings, not their free consumer email offerings. When in doubt, use Google Workspace, unless your target audience is more often using Microsoft 365, which is more common in the enterprise.
 
-_Coming soon_
+You should also not use a third-party email service provider (ESP) such as SendGrid or AWS SES, as they most often used for transactional emails and marketing emails, and have strict anti-spam policies. They also more likely end up in "Promotions" or "Updated" folders, whereas emails sent from a trusted mailbox provider are more likely to end up in the "Primary" inbox. To a lesser extent, you can consider more affordable providers like Zoho Mail, but they are not as reliable as Google or Microsoft. Some ESPs also offer dedicated IP addresses, but these are not recommended because their IP address reputation is not as good as Google or Microsoft, especially if you're starting out.
+
+You can also optimize for having the same mailbox provider as your recipient, as this can also increase your deliverability rate. For example, if you're sending an email to someone with an address hosted on Google, you should use Google Workspace to send the email. This is because mailbox providers are more likely to deliver emails from the same provider, and slightly less likely to deliver emails from different providers. You can use the DNS records of the recipient's domain to determine which mailbox provider they are using and then use the same provider to send the email, but this is probably overkill for many use cases.
+
+#### Rotating mailboxes
+
+> **tl;dr:** Use a few mailboxes for each domain, and have a backup mailbox for each active mailbox.
+
+It's recommended to have at least two mailboxes for each domain, one active and one backup. This is because if your active mailbox is flagged as spam, you can switch to your backup mailbox and continue sending emails. If you wish to, you can also have a backup mailbox provider, but this is not necessary unless you have a very high volume of emails or a high risk of being flagged as spam. If you have a backup mailbox provider, you should use separate domains for each provider instead of using subdomains.
+
+A good rule of thumb is to have one backup mailbox for every 3 active mailboxes. For example, if you have 3 active mailboxes, you should have 1 backup mailbox, and if you have 6 active mailboxes, you should have 2 backup mailboxes. This is because if you have a high volume of emails, you're more likely to be flagged as spam, and therefore more likely to need a backup mailbox.
+
+When a mailbox gets a lot of spam complaints, it's likely to be flagged as spam by mailbox providers, and therefore you should stop using it immediately. You should also stop using a mailbox if you're getting a lot of bouncebacks, as this is also likely to affect your deliverability rate. If you're using a backup mailbox, you can switch to it immediately, and if you're not, you should create a new mailbox and start warming it up. For the next few weeks, you should continue to warm up your previous mailbox and only restart using it after it has a good sender reputation again.
 
 #### Sending limits
 
-_Coming soon_
+> **tl;dr:** Strictly enforce a maximum number of emails sent per day per mailbox, starting with 30 emails per day per mailbox, and a maximum of 3 active mailboxes per domain.
 
-### Rotating mailboxes
+You should strictly enforce a maximum number of emails sent per day per mailbox, and scale up the number of active mailboxes as you want to send more emails. This is because if you send too many emails from a single mailbox, it's likely to be flagged as spam by mailbox providers. You should also not have more than a few active mailboxes per domain, so if you want to send more emails, you should use purchase additional domains and create new mailboxes for them.
 
-_Coming soon_
+We recommend a maximum of 30 emails per day per mailbox, and a maximum of 3 active mailboxes per domain when you're getting started. This means that you can send up to 90 emails per day per domain. This is a good starting point, and you can increase the number of emails per day per mailbox and the number of active mailboxes per domain as your domain reputation increases. You should also not send more than 1 email every 10-30 minutes per mailbox, because that's the average time it takes for a human to write and send an email. The more you can mimic human behavior, the better for your deliverability, so you should aim to send emails at a human-like pace, for example one email every 30 minutes and distributed randomly throughout the day.
 
 ## Email warming
+
+> **tl;dr:** Start with 1 email per day and increase by 2 emails every day until you reach 30 emails per day after two weeks, and then continue to warm up your mailbox while keeping the same maximum number of emails per day, randomizing it.
 
 Email warming is the process of gradually increasing the number of emails you send and receive from a new mailbox to establish a good sender reputation with mailbox providers. This is done by sending a small number of emails at first, and then gradually increasing the number of emails sent over time, and having a percent of those emails replied to. This makes the mailbox provider believe that the emails sent are worth replying to, and are therefore not likely spam.
 
@@ -104,6 +174,8 @@ After the initial ramping up period, you should continue to warm up your mailbox
 - Reply rate: 30-40%
 
 ## Body content
+
+> **tl;dr:** Personalize the messaging, randomize the body content, and avoid spammy words, images, links, and attachments.
 
 Perhaps the most important part of your email is the body content. This is because mailbox providers are increasingly using machine learning to determine whether an email is spam or not, and the body content is one the most important factors in this decision. And of course, sending the right message to the right person is the most important part of your outbound strategy, if you can't control for the right time.
 
@@ -192,6 +264,8 @@ _Coming soon_
 ## Key metrics
 
 _Coming soon_
+
+- Google Postmaster Tools
 
 ## Too much to do?
 

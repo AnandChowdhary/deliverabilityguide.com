@@ -1,10 +1,8 @@
-# 📧 [FirstQuadrant](https://firstquadrant.ai?utm_source=github&utm_medium=readme&utm_campaign=email-deliverability-checklist) Email Deliverability Checklist
+# 📧 The Open-source Email Deliverability Guide ([DeliverabilityGuide.com](https://deliverabilityguide.com))
 
 **This aims to be the world's most comprehensive email deliverability checklist.** _(Work in progress!)_
 
-If you're sending outbound emails, you should follow this checklist to ensure that your emails are delivered to the inbox and not marked as spam.
-
-This checklist is based on the experience of sending tons of of outbound emails, and is used by FirstQuadrant to ensure that our customers have the highest deliverability rate possible. Contributions are welcome!
+If you're sending outbound emails, you should follow this checklist to ensure that your emails are delivered to the inbox and not marked as spam. This checklist is based on the experience of sending tons of of outbound emails, and it's open source to make sure we have the most recent and relevant information. Contributions are welcome!
 
 ## Checklist
 
@@ -135,15 +133,21 @@ You should strictly enforce a maximum number of emails sent per day per mailbox,
 
 We recommend a maximum of 30 emails per day per mailbox, and a maximum of 3 active mailboxes per domain when you're getting started. This means that you can send up to 90 emails per day per domain. This is a good starting point, and you can increase the number of emails per day per mailbox and the number of active mailboxes per domain as your domain reputation increases. You should also not send more than 1 email every 10-30 minutes per mailbox, because that's the average time it takes for a human to write and send an email. The more you can mimic human behavior, the better for your deliverability, so you should aim to send emails at a human-like pace, for example one email every 30 minutes and distributed randomly throughout the day.
 
+- Start with low volume
+- Have a consistent volume and don't have spikes
+- Scale up when you have "message market fit"
+
 ## Email warming
 
 > **tl;dr:** Start with 1 email per day and increase by 2 emails every day until you reach 30 emails per day after two weeks, and then continue to warm up your mailbox while keeping the same maximum number of emails per day, randomizing it.
 
 Email warming is the process of gradually increasing the number of emails you send and receive from a new mailbox to establish a good sender reputation with mailbox providers. This is done by sending a small number of emails at first, and then gradually increasing the number of emails sent over time, and having a percent of those emails replied to. This makes the mailbox provider believe that the emails sent are worth replying to, and are therefore not likely spam.
 
-### Golden rule: Always keep warming
+### Always keep warming
 
 Regardless of whether you have a completely fresh mailbox or one that's already been used in the past, it is of paramount importance that you always continue to warm up your mailboxes. This is to maintain your sender reputation and ensure that your emails are delivered to the inbox, and if you have a good reputation today does not necessarily mean that you will have a good reputation tomorrow.
+
+What's interesting is that some deliverability experts no longer recommend warming as they suggest that it's trivial to detect and therefore disregard warming emails, but until this is of general consensus, it's best to continue to warm up your mailboxes.
 
 ### For new mailboxes
 
@@ -173,6 +177,10 @@ After the initial ramping up period, you should continue to warm up your mailbox
 - Total maximum emails per day: 30 ±5
 - Reply rate: 30-40%
 
+### Positive and negative actions
+
+Positive actions include replies, marking as important, etc., while negative actions include marking as spam, unsubscribing, etc. Since we want to optimize for positive actions, you can employ certain tricks, such as asking a question. Even if it's a simple yes/no question, it's more likely to get a reply and therefore a positive action.
+
 ## Body content
 
 > **tl;dr:** Personalize the messaging, randomize the body content, and avoid spammy words, images, links, and attachments.
@@ -181,7 +189,7 @@ Perhaps the most important part of your email is the body content. This is becau
 
 ### Personalize the messaging
 
-Using variables like "Hi {firstName}" is no longer enough as recipients are receiving too many outbound emails and can easily tell if it's a template. The more personalized your message, the less likely it is to be flagged as spam by recipients which does a lot of damage to your sending reputation. You should either write personalized emails manually, or use an automated tool like FirstQuadrant that does this for you. At the very least, you should personalize the first sentence of your email to make it seem like it's not a template.
+Using variables like "Hi {firstName}" is no longer enough as recipients are receiving too many outbound emails and can easily tell if it's a template. The more personalized your message, the less likely it is to be flagged as spam by recipients which does a lot of damage to your sending reputation. You should either write personalized emails manually, or use an automated tool like that does this for you, for example using a large language model. At the very least, you should personalize the first sentence of your email to make it seem like it's not a template.
 
 ### Randomize the body content
 
@@ -193,11 +201,11 @@ One way to easily get started is to use the spintax strategy, where you have mul
 - I'm reaching out to you because I saw online that you're working for {companyName}.
 - I thought of reaching because I saw that you're working at {companyName}.
 
-If this sounds too easy to be very useful, it's because it probably is. These days, it's best that you go further than having just a few variations of a few words in the content. Ideally, the entire email will be generated by a large language model like GPT-4, which is what FirstQuadrant does, so that it's completely unique and can be highly personalized.
+If this sounds too easy to be very useful, it's because it probably is. These days, it's best that you go further than having just a few variations of a few words in the content. Ideally, the entire email will be generated by a large language model like GPT-4, so that it's completely unique and can be highly personalized, or written manually.
 
 ### What not to include
 
-It's best to avoid including anything that could be flagged as spam by mailbox providers. Ideally, your email should be as simple as possible, totally in plain text. Of course, this is not always possible, so you should try to avoid words and phrases that are likely to be flagged as spam, and include as few images and links as possible.
+It's best to avoid including anything that could be flagged as spam by mailbox providers. Ideally, your email should be as simple as possible, totally in plain text without any fancy HTML. Of course, this is not always possible, so you should try to avoid words and phrases that are likely to be flagged as spam, and include as few images and links as possible.
 
 #### Spammy words
 
@@ -205,13 +213,19 @@ Words such as "risk-free" and phrases like "additional income" are very often fo
 
 Although articles such as [188 Spam Words to Avoid: How to Stay Out of Email Spam Folders](https://www.activecampaign.com/blog/spam-words) help you avoid spammy words, it's best to use an API that detects spammy words in your email content and warns you about them before you send the email.
 
+Since mailbox providers have dynamic spam word lists and increasingly use machine learning to detect spam, so it's possible that copy that works for a certain period of time will stop working later, so keep an eye on your spam rate and adjust your copy accordingly (see [Key metrics](#key-metrics) below).
+
+It's also recommended to use regular sentence (or lower) case copy, as uppercase copy is often used in spam emails. Similarly, you should avoid using too many exclamation marks.
+
 #### Images
 
 Images are often used in spam emails, and are therefore likely to be flagged as spam. If you must include an image, make sure it's not the only thing in your email, and that it's not too large, and ideally not in the first email but in subsequent follow-ups.
 
 You should also include an `alt` attribute in the image tag, which is good for accessibility but can also help with deliverability. This is because if the image is not loaded, the `alt` attribute will be displayed instead and the mailbox provider can also use this text in their spam detection algorithm.
 
-Tracking pixels are usually 1x1 pixel GIFs which are known to reduce deliverability, so make sure any "real" images you include are larger than 1x1 pixel to avoid being flagged as a tracking pixel. You should also aim to have a short, human-readable URL for the image, and not a long, random URL that looks like a tracking pixel.
+Although it's good to have alternate text on images, it's not a good idea to have text in images. This is because putting text in images used to be a common way to bypass spam filters by fraudsters, so your images should not have a lot of text in them (a little bit like a logo is usually okay).
+
+Tracking pixels are usually 1x1 pixel GIFs which may reduce deliverability, so make sure any "real" images you include are larger than 1x1 pixel to avoid being flagged as a tracking pixel. You should also aim to have a short, human-readable URL for the image, and not a long, random URL that looks like a tracking pixel.
 
 #### Links
 
@@ -221,17 +235,31 @@ It's also recommended for the link to be a short, human-readable URL, and not a 
 
 #### Attachments
 
-Attachments are in general a bad idea, as they are often used in spam emails, especially executable files. Although PDFs are frequently used in proposals and presentations, they are able to contain malicious code and connect to the internet, so they are often flagged as spam. You should not include attachments in your first email, and ideally not in subsequent follow-ups either, only sending them when requested by the recipient.
+Attachments are in general a bad idea, as they are often used in spam emails, especially executable or compressed files. Although PDFs are frequently used in proposals and presentations, they are able to contain malicious code and connect to the internet, so they are often flagged as spam. You should not include attachments in your first email, and ideally not in subsequent follow-ups either, only sending them when requested by the recipient.
 
 The only exception is sending calendar invites, but these are usually open-in `.ics` files, so you should still avoid sending them unless requested.
+
+### Keep markup similar to human emails
+
+_Coming soon_
+
+- Gmail uses divs instead of paragraphs
+- When quoting text, use exact markup
+- Popular HTML templates go to promotions
 
 ### Opt-out and unsubscribe
 
 _Coming soon_
 
+- Unsubscribe link is good because people don't mark as spam
+- Asking for "If you're ot interested, let me know" is better than marking as spam
+
 ### Subject line
 
 _Coming soon_
+
+- Subject copy determines open rate, higher the better for deliverability
+- Iterate, A/B test, keep an eye on open rate
 
 ## Open and click tracking
 
@@ -243,9 +271,19 @@ _Coming soon_
 
 ### Targeting
 
+- It's not good when people mark you as spam
+- If you reach out to the wrong people, they will mark you as spam
+- Clearly define your target audience
+
 _Coming soon_
 
 #### Buying intent
+
+_Coming soon_
+
+- Spam traps exist when you buy email lists
+
+#### Email verification
 
 _Coming soon_
 
@@ -265,21 +303,12 @@ _Coming soon_
 
 _Coming soon_
 
+- Open rate, click rate, click-to-open rate
+- Replies, bouncebacks, spam complaints, unsubscribes
+- Inbox placement rate, spam placement rate, missing rate
+- Spam traps, blocklists
 - Google Postmaster Tools
-
-## Too much to do?
-
-If you're overwhelmed by the number of things you need to do to set up a scalable outbound setup with high deliverability, you can use [FirstQuadrant](https://firstquadrant.ai?utm_source=github&utm_medium=readme&utm_campaign=email-deliverability-checklist). We'll take care of everything for you, including literally everything in this list, and then some, including:
-
-- Highly personalized emails using GPT-4
-- Intelligent lead sourcing based on your ICP with enrichment
-- Smart email scheduling with automated follow-ups
-- Responsive replies to incoming emails based on conversation context
-- Real-time analytics dashboard of your outbound sales funnel with key metrics
-- A gorgeous, lightning-fast app with dedicated support via Slack Connect
-
-**[Sign up for FirstQuadrant →](https://firstquadrant.ai?utm_source=github&utm_medium=readme&utm_campaign=email-deliverability-checklist)**
 
 ## 📄 License
 
-This work is licensed under a [Creative Commons Attribution Share Alike 4.0 International](./LICENSE) by Anand Chowdhary and [FirstQuadrant](https://firstquadrant.ai?utm_source=github&utm_medium=readme&utm_campaign=email-deliverability-checklist).
+This work is licensed under a [Creative Commons Attribution Share Alike 4.0 International](./LICENSE) by Anand Chowdhary.

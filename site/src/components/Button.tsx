@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import clsx, { type ClassValue } from 'clsx'
 import Link from 'next/link'
 
 const baseStyles = {
@@ -49,7 +49,7 @@ export function Button<
 
   className = clsx(
     baseStyles[variant],
-    variantStyles[variant][color],
+    variantStyles[variant][color] as ClassValue,
     className,
   )
 

@@ -12,7 +12,7 @@ export default function Home() {
       <NavBar />
       <section className="py-16 sm:py-20 lg:py-32">
         <Container
-          className="prose lg:prose-lg max-w-none"
+          className="prose max-w-none break-words lg:prose-lg"
           dangerouslySetInnerHTML={{ __html: `<!-- content -->` }}
         />
       </section>

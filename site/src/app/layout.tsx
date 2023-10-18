@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import clsx from 'clsx'
 import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -43,6 +44,7 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-full flex-col">
         {children}
+        <Analytics />
         <Script src="https://gumroad.com/js/gumroad.js"></Script>
       </body>
     </html>

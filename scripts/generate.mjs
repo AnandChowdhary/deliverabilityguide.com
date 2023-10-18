@@ -18,7 +18,7 @@ const marked = new Marked(
 );
 
 (async () => {
-  const template = await fs.readFile("../template.html", "utf-8");
+  const template = await fs.readFile("../site/src/app/template.tsx", "utf-8");
   let markdown = await fs.readFile("../README.md", "utf-8");
   // Remove first line
   markdown = markdown.substring(markdown.indexOf("\n") + 1);
@@ -29,9 +29,11 @@ const marked = new Marked(
   markdown = markdown.replaceAll("- [x] ", "- ");
 
   const html = marked.parse(markdown, { gfm: true });
-  const output = template.replace("<!-- content -->", html);
-  await fs.mkdir("../dist", { recursive: true });
-  await fs.writeFile("../dist/index.html", output);
+  const output = template.replace(
+    "<!-- content -->",
+    html.replace(/`/g, "\\`")
+  );
+  await fs.writeFile("../site/src/app/page.tsx", output);
 })()
   .then(() => console.log("Completed!"))
   .catch((error) => {

@@ -2,8 +2,9 @@
   "name": "deliverabilityguide.com-scripts",
   "type": "module",
   "version": "0.0.0",
-  "main": "index.mjs",
+  "main": "generate.mjs",
   "scripts": {
+    "generate": "node generate.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -1,8 +1,10 @@
 # 📧 The Open-source Email Deliverability Guide ([DeliverabilityGuide.com](https://deliverabilityguide.com))
 
-**This aims to be the world's most comprehensive email deliverability checklist.** _(Work in progress!)_
+**This aims to be the world's most comprehensive email deliverability checklist.** _(It's a work in progress!)_
 
 If you're sending outbound emails, you should follow this checklist to ensure that your emails are delivered to the inbox and not marked as spam. This checklist is based on the experience of sending tons of of outbound emails, and it's open source to make sure we have the most recent and relevant information. Contributions are welcome!
+
+![social](https://github.com/AnandChowdhary/deliverabilityguide.com/assets/2841780/84888f22-c5e2-4d9a-bbdd-c95823404acf)
 
 ## Mailboxes
 

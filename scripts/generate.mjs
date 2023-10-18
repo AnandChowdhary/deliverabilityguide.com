@@ -18,10 +18,10 @@ const marked = new Marked(
 );
 
 (async () => {
-  const template = await fs.readFile("../site/src/app/template.tsx", "utf-8");
+  const template = await fs.readFile("../site/src/app/example.tsx", "utf-8");
   let markdown = await fs.readFile("../README.md", "utf-8");
-  // Remove first line
-  markdown = markdown.substring(markdown.indexOf("\n") + 1);
+  // Remove until the first h2
+  markdown = markdown.substring(markdown.indexOf("## ") - 1);
   // Remove license section
   const licenseLine = "## 📄 License";
   markdown = markdown.substring(0, markdown.indexOf(licenseLine));

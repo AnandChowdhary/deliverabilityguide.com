@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-display;
+}
+
+.prose h5 {
+  font-weight: bold;
+}
+
+.prose * + h2 {
+  margin-top: 7.5rem;
+  padding-top: 12rem;
+}
+
+.prose * + h3 {
+  margin-top: 5rem;
+}
+
+.prose * + h4 {
+  margin-top: 3rem;
+}
+
+.prose * + h5 {
+  margin-top: 2.5rem;
+}
+
+.prose * + h6 {
+  margin-top: 2rem;
+}

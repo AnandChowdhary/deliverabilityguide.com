@@ -10,8 +10,11 @@ export default function Home() {
       <Hero />
       <Introduction />
       <NavBar />
-      <section className="scroll-mt-14 py-16 sm:scroll-mt-32 sm:py-20 lg:py-32">
-        <Container dangerouslySetInnerHTML={{ __html: `<!-- content -->` }} />
+      <section className="py-16 sm:py-20 lg:py-32">
+        <Container
+          className="prose lg:prose-lg max-w-none"
+          dangerouslySetInnerHTML={{ __html: `<!-- content -->` }}
+        />
       </section>
       <Footer />
     </>

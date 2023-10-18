@@ -4,46 +4,7 @@
 
 If you're sending outbound emails, you should follow this checklist to ensure that your emails are delivered to the inbox and not marked as spam. This checklist is based on the experience of sending tons of of outbound emails, and it's open source to make sure we have the most recent and relevant information. Contributions are welcome!
 
-## Checklist
-
-- [x] [Custom domains and mailboxes](#custom-domains-and-mailboxes)
-  - [x] [Additional domains](#additional-domains)
-    - [x] [DNS records](#dns-records)
-      - [x] [SPF](#spf)
-      - [x] [DKIM](#dkim)
-      - [x] [DMARC](#dmarc)
-      - [x] [Other records](#other-records)
-    - [x] [Redirects](#redirects)
-  - [x] [Mailboxes](#mailboxes)
-    - [x] [Mailbox providers](#mailbox-providers)
-    - [x] [Rotating mailboxes](#rotating-mailboxes)
-    - [x] [Sending limits](#sending-limits)
-- [x] [Email warming](#email-warming)
-  - [x] [Golden rule: Always keep warming](#golden-rule-always-keep-warming)
-  - [x] [For new mailboxes](#for-new-mailboxes)
-  - [x] [Randomization is important](#randomization-is-important)
-  - [x] [After ramping up](#after-ramping-up)
-- [x] [Body content](#body-content)
-  - [x] [Personalize the messaging](#personalize-the-messaging)
-  - [x] [Randomize the body content](#randomize-the-body-content)
-  - [x] [What not to include](#what-not-to-include)
-    - [x] [Spammy words](#spammy-words)
-    - [x] [Images](#images)
-    - [x] [Links](#links)
-    - [x] [Attachments](#attachments)
-  - [x] [Opt-out and unsubscribe](#opt-out-and-unsubscribe)
-  - [x] [Subject line](#subject-line)
-- [x] [Open and click tracking](#open-and-click-tracking)
-- [x] [Right people, right time](#right-people-right-time)
-  - [x] [Targeting](#targeting)
-    - [x] [Buying intent](#buying-intent)
-  - [x] [Scheduling](#scheduling)
-    - [x] [Days and timezones](#days-and-timezones)
-    - [x] [Randomization](#randomization)
-- [x] [Key metrics](#key-metrics)
-- [ ] [Too much to do?](#too-much-to-do)
-
-## Custom domains and mailboxes
+## Mailboxes
 
 _Coming soon_
 
@@ -137,7 +98,7 @@ We recommend a maximum of 30 emails per day per mailbox, and a maximum of 3 acti
 - Have a consistent volume and don't have spikes
 - Scale up when you have "message market fit"
 
-## Email warming
+## Warming
 
 > **tl;dr:** Start with 1 email per day and increase by 2 emails every day until you reach 30 emails per day after two weeks, and then continue to warm up your mailbox while keeping the same maximum number of emails per day, randomizing it.
 
@@ -181,7 +142,7 @@ After the initial ramping up period, you should continue to warm up your mailbox
 
 Positive actions include replies, marking as important, etc., while negative actions include marking as spam, unsubscribing, etc. Since we want to optimize for positive actions, you can employ certain tricks, such as asking a question. Even if it's a simple yes/no question, it's more likely to get a reply and therefore a positive action.
 
-## Body content
+## Content
 
 > **tl;dr:** Personalize the messaging, randomize the body content, and avoid spammy words, images, links, and attachments.
 
@@ -261,11 +222,11 @@ _Coming soon_
 - Subject copy determines open rate, higher the better for deliverability
 - Iterate, A/B test, keep an eye on open rate
 
-## Open and click tracking
+## Tracking
 
 _Coming soon_
 
-## Right people, right time
+## Audience
 
 _Coming soon_
 
@@ -299,7 +260,7 @@ _Coming soon_
 
 _Coming soon_
 
-## Key metrics
+## Metrics
 
 _Coming soon_
 

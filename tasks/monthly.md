@@ -2,7 +2,7 @@
 
 Run this task from the Deliverability Guide repository. Research the past month's developments, make useful updates consistent with the author's advice, and open a pull request for review. Complete the work rather than stopping at a research plan.
 
-This task creates a **PR against `main`**. Do not push changes directly to `main`, merge the PR, or deploy production. This task-specific release instruction overrides the usual direct-publishing workflow. No scheduled automation needs to be installed; the author invokes this prompt when ready.
+This task creates a **PR against `main`**. Do not push changes directly to `main`, merge the PR, or deploy production. This task-specific release instruction overrides the usual direct-publishing workflow.
 
 ## Load the project context
 

@@ -1,0 +1,35 @@
+name: Monthly Copilot task
+
+on:
+  schedule:
+    - cron: "0 9 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-monthly-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Trigger Copilot cloud agent task
+        env:
+          COPILOT_TOKEN: ${{ secrets.COPILOT_AGENT_TOKEN }}
+        run: |
+          if [ -z "$COPILOT_TOKEN" ]; then
+            echo "Missing required secret: COPILOT_AGENT_TOKEN"
+            exit 1
+          fi
+
+          prompt_json=$(jq -Rs . < tasks/monthly.md)
+
+          curl --fail-with-body \
+            --request POST \
+            --url "https://api.github.com/agents/repos/${{ github.repository }}/tasks" \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: ******" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --data "{\"prompt\":${prompt_json},\"base_ref\":\"main\",\"create_pull_request\":true}"

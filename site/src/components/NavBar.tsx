@@ -4,15 +4,6 @@ import { Popover } from '@headlessui/react'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 
-const sections = [
-  { id: 'mailboxes', title: 'Mailboxes' },
-  { id: 'warming', title: 'Warming' },
-  { id: 'content', title: 'Content' },
-  { id: 'tracking', title: 'Tracking' },
-  { id: 'audience', title: 'Audience' },
-  { id: 'metrics', title: 'Metrics' },
-]
-
 function MenuIcon({
   open,
   ...props
@@ -36,7 +27,7 @@ function MenuIcon({
   )
 }
 
-export function NavBar() {
+export function NavBar({ sections }: { sections: { id: string; title: string }[] }) {
   let navBarRef = useRef<React.ElementRef<'div'>>(null)
   let [activeIndex, setActiveIndex] = useState<number | null>(null)
   let mobileActiveIndex = activeIndex === null ? 0 : activeIndex
@@ -82,7 +73,7 @@ export function NavBar() {
       window.removeEventListener('resize', updateActiveIndex)
       window.removeEventListener('scroll', updateActiveIndex)
     }
-  }, [])
+  }, [sections])
 
   return (
     <div ref={navBarRef} className="sticky top-0 z-50">
@@ -125,7 +116,7 @@ export function NavBar() {
                 <MenuIcon open={open} className="h-6 w-6 stroke-slate-700" />
               </Popover.Button>
             </div>
-            <Popover.Panel className="absolute inset-x-0 top-0 bg-white/95 py-3.5 shadow-sm [@supports(backdrop-filter:blur(0))]:bg-white/80 [@supports(backdrop-filter:blur(0))]:backdrop-blur">
+            <Popover.Panel className="absolute inset-x-0 top-0 max-h-[80vh] overflow-y-auto bg-white/95 py-3.5 shadow-sm [@supports(backdrop-filter:blur(0))]:bg-white/80 [@supports(backdrop-filter:blur(0))]:backdrop-blur">
               {sections.map((section, sectionIndex) => (
                 <Popover.Button
                   as="a"
@@ -149,17 +140,17 @@ export function NavBar() {
           </>
         )}
       </Popover>
-      <div className="hidden sm:flex sm:h-32 sm:justify-center sm:border-b sm:border-slate-200 sm:bg-white/95 sm:[@supports(backdrop-filter:blur(0))]:bg-white/80 sm:[@supports(backdrop-filter:blur(0))]:backdrop-blur">
+      <div className="hidden sm:flex sm:h-24 sm:overflow-x-auto sm:border-b sm:border-slate-200 sm:bg-white/95 sm:[@supports(backdrop-filter:blur(0))]:bg-white/80 sm:[@supports(backdrop-filter:blur(0))]:backdrop-blur">
         <ol
           role="list"
-          className="mb-[-2px] grid auto-cols-[minmax(0,15rem)] grid-flow-col text-base font-medium text-slate-900 [counter-reset:section]"
+          className="mb-[-2px] grid min-w-full auto-cols-max grid-flow-col text-base font-medium text-slate-900 [counter-reset:section]"
         >
           {sections.map((section, sectionIndex) => (
             <li key={section.id} className="flex [counter-increment:section]">
               <a
                 href={`#${section.id}`}
                 className={clsx(
-                  'flex w-full flex-col items-center justify-center border-b-2 before:mb-2 before:font-mono before:text-sm before:content-[counter(section,decimal-leading-zero)]',
+                  'flex w-full flex-col items-center justify-center whitespace-nowrap border-b-2 px-5 before:mb-2 before:font-mono before:text-sm before:content-[counter(section,decimal-leading-zero)]',
                   sectionIndex === activeIndex
                     ? 'border-slate-600 bg-slate-50 text-slate-600 before:text-slate-600'
                     : 'border-transparent before:text-slate-500 hover:bg-slate-50/40 hover:before:text-slate-900',

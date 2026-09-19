@@ -14,23 +14,22 @@ export function Introduction() {
           guide. And it’s free.
         </p>
         <p className="mt-4">
-          If you’re sending outbound emails, you should follow this checklist to
-          ensure that your emails are delivered to the inbox and not marked as
-          spam. This checklist is based on the experience of sending thousands
-          of outbound emails.
+          Send email that people want and keep the infrastructure behind it
+          reliable. Learn how authentication, recipient expectations, and
+          receiver feedback work together. No tool can guarantee inbox placement.
         </p>
         <p className="mt-4">
-          You’ll learn everything there is to know about email deliverability,
+          This living handbook covers the work behind email deliverability,
           including:
         </p>
         <ul role="list" className="mt-8 space-y-3">
           {[
-            'How to set up custom domains and mailboxes',
-            'When and how to do email warming',
-            'How to write a good subject and body content, including prompts for LLMs like GPT-4',
-            'How to set up open and click tracking with minimal deliverability impact',
+            'How to authenticate domains and choose sending infrastructure',
+            'How to ramp up real, permission-based sending',
+            'How to create clear, accessible content and easy unsubscribe flows',
+            'What open and click tracking can and cannot tell you',
             'Targeting and segmentation strategies',
-            'Understading key metrics and email analytics',
+            'How to diagnose problems using receiver feedback and meaningful metrics',
           ].map((feature) => (
             <li key={feature} className="flex">
               <CheckIcon className="h-8 w-8 flex-none fill-slate-500" />

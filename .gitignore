@@ -1,2 +1,7 @@
 dist
-scripts/node_modules
+node_modules/
+.context/
+site/.next/
+site/out/
+site/src/app/page.tsx
+site/tsconfig.tsbuildinfo

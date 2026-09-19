@@ -16,12 +16,11 @@
 }
 
 .prose * + h2 {
-  margin-top: 7.5rem;
-  padding-top: 12rem;
+  margin-top: 4rem;
 }
 
 .prose * + h3 {
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .prose * + h4 {
@@ -34,4 +33,36 @@
 
 .prose * + h6 {
   margin-top: 2rem;
+}
+
+.prose :is(h2, h3, h4, h5, h6) {
+  scroll-margin-top: 7rem;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose th, .prose td {
+  min-width: 10rem;
+  padding: 0.75rem;
+}
+
+.guide-contents {
+  border: 1px solid #cbd5e1;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+}
+
+.guide-contents h2 { margin-top: 0; }
+.guide-contents ul { list-style: none; padding: 0; }
+.guide-contents li { break-inside: avoid; }
+.guide-contents .toc-level-2 { font-weight: 700; margin-top: 1rem; }
+.guide-contents .toc-level-3 { font-size: 0.875em; padding-left: 1rem; }
+
+@media (min-width: 768px) {
+  .guide-contents ul { columns: 2; column-gap: 2rem; }
 }

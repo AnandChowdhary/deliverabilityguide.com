@@ -1,10 +1,40 @@
 # 📧 The Open-source Email Deliverability Guide ([DeliverabilityGuide.com](https://deliverabilityguide.com))
 
-**This aims to be the world's most comprehensive email deliverability checklist.** _(It's a work in progress!)_
+A practical, open-source handbook for sending email that recipients want: authentication, infrastructure, consent, content, monitoring, and recovery.
 
-If you're sending outbound emails, you should follow this checklist to ensure that your emails are delivered to the inbox and not marked as spam. This checklist is based on the experience of sending tons of of outbound emails, and it's open source to make sure we have the most recent and relevant information. Contributions are welcome!
+**Deliverability is earned over time. No checklist, provider, or tool can guarantee inbox placement.** This guide distinguishes receiver requirements from operational recommendations and links to the evidence behind them.
 
-![social](https://github.com/AnandChowdhary/deliverabilityguide.com/assets/2841780/84888f22-c5e2-4d9a-bbdd-c95823404acf)
+## Start here
+
+> **The priority order:** wanted mail → reliable identity → easy unsubscribe → controlled sending → continuous measurement.
+
+Delivery means a receiving server accepted a message. Inbox placement means it reached an inbox rather than spam; tabs such as Promotions are still part of the inbox. Neither an SMTP success response nor an open-tracking event proves that a person read your message.
+
+Choose a path through the guide:
+
+- **Launching a newsletter:** establish permission and unsubscribe handling, authenticate your ESP, then ramp up with your most engaged subscribers.
+- **Sending product email:** separate time-sensitive password resets and receipts from promotional campaigns; monitor queues, bounces, and end-to-end latency.
+- **Fixing a sudden problem:** preserve a sample message and the complete receiver response, identify the affected provider and stream, then pause the problematic traffic while investigating.
+- **Managing sales outreach:** a publicly listed or verified address does not establish permission. Review receiver policies, your provider’s acceptable-use terms, and applicable law before sending. More mailboxes do not solve unwanted mail.
+
+### Preflight checklist
+
+- [ ] Inventory every sending system, owner, From domain, DKIM domain, Return-Path domain, IP pool, and message purpose.
+- [ ] Verify SPF and DKIM on messages actually received; confirm DMARC alignment with the visible From domain.
+- [ ] Establish TLS and valid forward/reverse DNS with your sending provider.
+- [ ] Verify where each recipient came from, what they requested, and which suppression rules apply.
+- [ ] Test unsubscribe processing, including headers where required, and ensure scheduled messages respect new suppressions.
+- [ ] Separate transactional and promotional traffic, with appropriate access controls and limits.
+- [ ] Test the final MIME message, links, mobile rendering, text alternative, and reply handling.
+- [ ] Connect provider feedback and event webhooks; assign someone to respond to alerts.
+- [ ] Start with a representative, engaged segment and expand only when receiver feedback supports it.
+- [ ] Record a rollback plan before changing domains, providers, IPs, or DNS.
+
+### Evidence and scope
+
+Provider documentation is the authority for provider requirements. Standards define protocol behavior. Expert articles help explain operations, but anecdotes and vendor benchmarks are not universal rules. A published quota is a ceiling, not a safe sending target. Legal permission, provider permission, and recipient expectations are separate questions.
+
+This guide covers permission-based marketing, transactional email, and business correspondence. Recommendations are starting points for your own measured program. When a rule depends on recipient provider, message type, or jurisdiction, apply it to that scope rather than to all email.
 
 ## Mailboxes
 

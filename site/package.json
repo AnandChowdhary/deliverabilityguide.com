@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prebuild": "npm --prefix ../scripts ci --no-audit --no-fund && node ../scripts/generate.mjs",
+    "predev": "npm --prefix ../scripts ci --no-audit --no-fund && node ../scripts/generate.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

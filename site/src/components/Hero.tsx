@@ -54,8 +54,8 @@ export function Hero() {
               Open-source email deliverability guide.
             </h1>
             <p className="mt-4 text-3xl text-slate-600">
-              Follow this checklist to ensure that your outbound emails do not
-              end up in spam.
+              Build a trusted sending program with practical, evidence-based
+              guidance for reaching the inbox.
             </p>
             <div className="mt-8 flex items-center gap-5">
               <a

@@ -11,10 +11,13 @@
   "author": "Anand Chowdhary <mail@anandchowdhary.com>",
   "license": "MIT",
   "dependencies": {
-    "highlight.js": "^11.8.0",
-    "marked": "^7.0.5",
-    "marked-gfm-heading-id": "^3.0.6",
-    "marked-highlight": "^2.0.4",
-    "marked-smartypants": "^1.1.0"
+    "highlight.js": "^11.12.0",
+    "marked": "^18.0.13",
+    "marked-gfm-heading-id": "^4.1.4",
+    "marked-highlight": "^2.2.4",
+    "marked-smartypants": "^1.1.12"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

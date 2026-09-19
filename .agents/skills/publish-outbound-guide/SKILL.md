@@ -16,10 +16,11 @@ Use Node.js 24. When dependencies are absent, install with `npm ci --prefix scri
 ```sh
 npm test --prefix scripts
 npm run build --prefix site
+npm run lint --prefix site
 git diff --check
 ```
 
-The build regenerates the page, type-checks the site, and exports to `site/out/`. The repository's GitHub Actions workflow runs the generator tests and production build. Don't add tests that simply lock in the latest wording; existing generator tests cover section rendering, summary completeness, stable IDs, and relevant accessibility markup.
+The build regenerates the page, type-checks the site, and exports to `site/out/`. The repository's GitHub Actions workflow runs the generator tests, production build, and ESLint. Don't add tests that simply lock in the latest wording; existing generator tests cover section rendering, summary completeness, stable IDs, and relevant accessibility markup.
 
 ## Review the actual output
 

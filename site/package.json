@@ -4,33 +4,39 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && npm run typecheck",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "prebuild": "npm --prefix ../scripts ci --no-audit --no-fund && node ../scripts/generate.mjs",
-    "predev": "npm --prefix ../scripts ci --no-audit --no-fund && node ../scripts/generate.mjs"
+    "predev": "npm --prefix ../scripts ci --no-audit --no-fund && node ../scripts/generate.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "@types/node": "20.8.6",
-    "@types/react": "18.2.28",
-    "@types/react-dom": "18.2.13",
-    "@vercel/analytics": "^1.1.1",
-    "autoprefixer": "^10.4.16",
-    "clsx": "^2.0.0",
-    "next": "13.5.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "^3.3.3",
-    "typescript": "5.2.2"
+    "@headlessui/react": "^2.2.10",
+    "@types/node": "26.6.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@typescript/native": "npm:typescript@7.0.2",
+    "@vercel/analytics": "^2.0.1",
+    "clsx": "^2.1.1",
+    "next": "16.3.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "npm:@typescript/typescript6@6.0.2"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10",
-    "eslint": "8.51.0",
-    "eslint-config-next": "13.5.5",
-    "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "^0.5.6",
-    "sharp": "^0.32.6"
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.5",
+    "postcss": "^8.5.28",
+    "prettier": "^3.9.8",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "sharp": "^0.35.4"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

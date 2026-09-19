@@ -53,6 +53,8 @@ export function GuideReader({ html, chapters, outline }: {
     if (window.location.hash) {
       try { pendingSection.current = decodeURIComponent(window.location.hash.slice(1)) } catch { /* Ignore malformed hashes. */ }
     }
+    // Hydrate browser-only preferences after the server-compatible first render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMode(initial)
     setReady(true)
   }, [])

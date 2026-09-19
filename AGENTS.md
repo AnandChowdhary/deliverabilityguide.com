@@ -35,7 +35,7 @@ For a recurring research update, run [tasks/monthly.md](tasks/monthly.md). It lo
 - `site/src/components/Hero.tsx`, `Introduction.tsx`, and `site/src/app/layout.tsx`: separately maintained introduction, hero, and metadata.
 - `.context/`: gitignored scratch research, screenshots, browser tools, and temporary checks. It may be absent in a fresh clone. Durable decisions and reusable instructions belong in tracked files, not only here.
 
-Use Node.js 24. Install with `npm ci --prefix scripts` and `npm ci --prefix site` when needed. Run `npm test --prefix scripts` and `npm run build --prefix site`; the build regenerates the guide and exports to `site/out/`. Do not hand-edit the generated page. After Markdown changes during development, run `npm run generate --prefix scripts`.
+Use Node.js 24. Install with `npm ci --prefix scripts` and `npm ci --prefix site` when needed. Run `npm test --prefix scripts` `npm run build --prefix site`, and `npm run lint --prefix site`; the build regenerates the guide and exports to `site/out/`. Do not hand-edit the generated page. After Markdown changes during development, run `npm run generate --prefix scripts`.
 
 Inspect full and TL;DR views, new sections in navigation, deep links, and mobile rendering. For reader behavior changes, also check keyboard access, mode switching at a deep link, saved preferences, and full content without JavaScript. See the publishing skill for the release workflow.
 

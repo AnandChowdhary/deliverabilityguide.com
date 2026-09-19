@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import { fileURLToPath } from "node:url";
 import hljs from "highlight.js";
-import { Marked } from "marked";
+import { Marked, Renderer } from "marked";
 import { gfmHeadingId } from "marked-gfm-heading-id";
 import { markedHighlight } from "marked-highlight";
 import { markedSmartypants } from "marked-smartypants";
@@ -24,11 +24,12 @@ export function renderGuide(markdown, { summaries = {}, requireSummaries = false
     }),
   );
   marked.use({ renderer: {
-    listitem(text, task) {
-      if (!task) return false;
+    listitem(item) {
+      if (!item.task) return false;
+      const text = Renderer.prototype.listitem.call(this, item);
       // Marked renders disabled checkboxes without names; use their visible task text.
       const label = text.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim().replace(/&(?!(?:#\d+|#x[0-9a-f]+|[a-z]+);)/gi, "&amp;").replaceAll('"', "&quot;");
-      return `<li>${text.replace("<input ", `<input aria-label="${label}" `)}</li>\n`;
+      return text.replace("<input ", `<input aria-label="${label}" `);
     },
   } });
   const html = marked.parse(markdown, { gfm: true })

@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.mts";
+@source "../app/page.tsx";
 
 .prose h1,
 .prose h2,

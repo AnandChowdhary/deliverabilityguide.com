@@ -35,8 +35,13 @@ For production validation:
 
 ```sh
 npm run build --prefix site
+npm run lint --prefix site
 ```
 
 Both development and production commands regenerate the guide first. Production output is in `site/out/`. After editing Markdown during an active development session, run `npm run generate --prefix scripts` to regenerate the page.
 
 Before submitting a change, inspect the chapter navigation and topic search, both reading modes, heading links, tables on mobile, code examples, and the remaining useful links. Check that “Read full section” preserves the reader's place and that the complete guide remains available without JavaScript. Describe what changed, the sources checked, and how you validated the result.
+
+### Dependency compatibility
+
+The build also runs `tsc --noEmit` with TypeScript 7. The site uses TypeScript 7 through `@typescript/native` and the official TypeScript 6 compatibility alias for tools that require the compiler API, including ESLint. ESLint stays on the latest 9.x release until the plugins shipped by `eslint-config-next` support ESLint 10. Run lint separately: Next.js 16 no longer runs it during builds.

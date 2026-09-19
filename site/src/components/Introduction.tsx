@@ -20,6 +20,12 @@ export function Introduction() {
           and keeps evolving as we learn.
         </p>
         <p className="mt-4">
+          Spend most of your effort finding and qualifying the right prospects.
+          Write the first emails yourself, learn from the replies, and then use
+          AI to scale the messaging that works. Keep each email simple and each
+          mailbox’s volume low.
+        </p>
+        <p className="mt-4">
           This living handbook covers cold-email deliverability,
           including:
         </p>

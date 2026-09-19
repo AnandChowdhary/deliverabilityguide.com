@@ -54,7 +54,7 @@ export function Hero() {
               Open-source email deliverability guide.
             </h1>
             <p className="mt-4 text-3xl text-slate-600">
-              Practical, evidence-based deliverability guidance for outbound
+              Practical, experience-based deliverability guidance for outbound
               sales cold email.
             </p>
             <div className="mt-8 flex items-center gap-5">

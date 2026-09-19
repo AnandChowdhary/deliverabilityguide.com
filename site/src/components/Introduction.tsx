@@ -14,9 +14,10 @@ export function Introduction() {
           guide for cold outbound sales. And it’s free.
         </p>
         <p className="mt-4">
-          Build and operate a cold outbound sales program with reliable
-          authentication, relevant targeting, clear messaging, and careful
-          follow-up. No tool can guarantee inbox placement.
+          If you’re sending outbound sales emails, this checklist draws on
+          the experience of sending tons of outbound emails to help you reach
+          the inbox. It combines practical judgment with technical guidance
+          and keeps evolving as we learn.
         </p>
         <p className="mt-4">
           This living handbook covers cold-email deliverability,
@@ -25,7 +26,7 @@ export function Introduction() {
         <ul role="list" className="mt-8 space-y-3">
           {[
             'How to set up and authenticate outbound domains and mailboxes',
-            'What mailbox warming can and cannot do for cold outreach',
+            'When and how to warm up your outbound mailboxes',
             'How to write relevant sales emails and make opting out easy',
             'What open and click tracking can and cannot tell you',
             'Prospect targeting, address verification, and follow-up scheduling',

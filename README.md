@@ -1,6 +1,8 @@
 # 📧 The Open-source Email Deliverability Guide ([DeliverabilityGuide.com](https://deliverabilityguide.com))
 
-**This aims to be the world's most comprehensive email deliverability checklist for outbound sales.** _(It's a work in progress!)_
+<a href="https://deliverabilityguide.com" target="_blank"><img alt="Book cover" src="https://raw.githubusercontent.com/AnandChowdhary/deliverabilityguide.com/b2784aaccf8872d00c972bb28dcc73d2e9d1b983/site/src/images/cover.png" width="300"></a>
+
+**This aims to be the world's most comprehensive email deliverability checklist for outbound sales.**
 
 If you're sending outbound sales emails, you should follow this checklist to give your emails the best chance of reaching the inbox instead of spam. This checklist is based on the experience of sending tons of outbound emails, and it's open source to keep the information recent and relevant. Contributions are welcome!
 

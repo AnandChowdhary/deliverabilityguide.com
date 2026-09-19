@@ -2,6 +2,8 @@
 
 This project is exclusively about **outbound sales cold email**. Help sales teams make informed decisions about domains, mailboxes, authentication, warmup claims, prospect selection, copy, follow-ups, and delivery diagnostics. Keep examples relevant to that workflow.
 
+For continuing work with a coding agent, start with [AGENTS.md](AGENTS.md). It routes to repository skills for writing, research, author interviews, and publication. The [author-decision reference](.agents/skills/write-outbound-guide/references/author-decisions.md) preserves accepted operating defaults and exceptions across sessions; update it when the author changes his guidance.
+
 ## Editorial approach
 
 - Preserve existing sections and anchors. Propose section removals or a change of audience for maintainer approval before implementing them.

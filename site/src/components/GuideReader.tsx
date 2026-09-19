@@ -92,13 +92,10 @@ export function GuideReader({ html, chapters, outline }: {
   }, [outline, mode])
 
   useEffect(() => {
-    const chapter = navRef.current?.querySelector<HTMLDetailsElement>(`[data-chapter="${activeHeading.chapterId}"]`)
-    if (chapter && !normalizedQuery) chapter.open = true
+    navRef.current?.querySelectorAll<HTMLDetailsElement>('details').forEach(chapter => {
+      chapter.open = Boolean(normalizedQuery) || chapter.dataset.chapter === activeHeading.chapterId
+    })
   }, [activeHeading.chapterId, normalizedQuery])
-
-  useEffect(() => {
-    if (normalizedQuery) navRef.current?.querySelectorAll('details').forEach(detail => { detail.open = true })
-  }, [normalizedQuery])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -163,7 +160,7 @@ export function GuideReader({ html, chapters, outline }: {
                 const children = outline.filter(heading => heading.chapterId === chapter.id && heading.level > 2 && (!normalizedQuery || chapterMatches || matches.includes(heading)))
                 if (normalizedQuery && !chapterMatches && !children.length) return null
                 return (
-                  <details key={chapter.id} data-chapter={chapter.id} open={index === 0 || normalizedQuery ? true : undefined} className={chapter.id === activeHeading.chapterId ? 'is-active-chapter' : ''}>
+                  <details key={chapter.id} data-chapter={chapter.id} open={Boolean(normalizedQuery) || chapter.id === activeHeading.chapterId} className={chapter.id === activeHeading.chapterId ? 'is-active-chapter' : ''}>
                     <summary><span className="reader-chapter-number">{String(index + 1).padStart(2, '0')}</span><span>{chapter.title}</span><span className="reader-chevron" aria-hidden="true">⌄</span></summary>
                     <ul>
                       <li><a href={`#${chapter.id}`} aria-current={activeId === chapter.id ? 'location' : undefined} onClick={() => followSection(chapter.id)}>{chapter.title === 'Tracking' ? 'Tracking overview' : 'Chapter overview'}</a></li>

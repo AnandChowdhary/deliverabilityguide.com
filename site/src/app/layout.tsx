@@ -15,7 +15,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Deliverability Guide',
   description:
-    'An open-source email deliverability handbook covering authentication, sender requirements, consent, unsubscribe, monitoring, and troubleshooting.',
+    'An open-source deliverability guide for outbound sales cold email: domains, mailboxes, authentication, warming, prospecting, follow-ups, and metrics.',
 }
 
 export default function RootLayout({

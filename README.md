@@ -1,40 +1,31 @@
 # 📧 The Open-source Email Deliverability Guide ([DeliverabilityGuide.com](https://deliverabilityguide.com))
 
-A practical, open-source handbook for sending email that recipients want: authentication, infrastructure, consent, content, monitoring, and recovery.
+**A practical, open-source guide to deliverability for outbound sales cold email.**
 
-**Deliverability is earned over time. No checklist, provider, or tool can guarantee inbox placement.** This guide distinguishes receiver requirements from operational recommendations and links to the evidence behind them.
+This guide is for sales teams setting up sending domains and mailboxes, researching prospects, writing relevant cold emails, managing follow-ups, and diagnosing delivery problems. It focuses on cold outbound sales throughout.
+
+No checklist or tool guarantees inbox placement. Provider requirements, sending policies, recipient reactions, and applicable law all matter. We distinguish documented requirements from recommendations and claims that lack reliable evidence.
 
 ## Start here
 
-> **The priority order:** wanted mail → reliable identity → easy unsubscribe → controlled sending → continuous measurement.
+### Cold outbound preflight
 
-Delivery means a receiving server accepted a message. Inbox placement means it reached an inbox rather than spam; tabs such as Promotions are still part of the inbox. Neither an SMTP success response nor an open-tracking event proves that a person read your message.
+- [ ] Define the prospect profile, business relevance, and reason this person should hear from you.
+- [ ] Check the rules for the recipient's jurisdiction and the acceptable-use policies of your mailbox and outreach providers.
+- [ ] Inventory sending domains, mailboxes, owners, sending tools, and integrations.
+- [ ] Verify SPF, DKIM, and DMARC alignment on an actual received message from each sending route.
+- [ ] Verify address data without treating a “valid” result as permission or proof of interest.
+- [ ] Set conservative mailbox limits, account-level contact caps, and a finite follow-up sequence.
+- [ ] Make sender identity accurate and opting out easy; synchronize stop requests across mailboxes and campaigns.
+- [ ] Test subject, personalization, links, rendering, and reply routing before launching.
+- [ ] Stop automated follow-ups when a prospect replies or opts out.
+- [ ] Monitor recipient-provider errors, complaints, invalid-address failures, positive replies, and meetings.
 
-Choose a path through the guide:
+### Read the evidence correctly
 
-- **Launching a newsletter:** establish permission and unsubscribe handling, authenticate your ESP, then ramp up with your most engaged subscribers.
-- **Sending product email:** separate time-sensitive password resets and receipts from promotional campaigns; monitor queues, bounces, and end-to-end latency.
-- **Fixing a sudden problem:** preserve a sample message and the complete receiver response, identify the affected provider and stream, then pause the problematic traffic while investigating.
-- **Managing sales outreach:** a publicly listed or verified address does not establish permission. Review receiver policies, your provider’s acceptable-use terms, and applicable law before sending. More mailboxes do not solve unwanted mail.
+Mailbox quotas are ceilings, not safe cold-email targets. A receiving server accepting a message does not prove inbox placement, and a tracked open does not prove a person read it. Advice based on one sender's results may not generalize to your audience, domain history, or provider.
 
-### Preflight checklist
-
-- [ ] Inventory every sending system, owner, From domain, DKIM domain, Return-Path domain, IP pool, and message purpose.
-- [ ] Verify SPF and DKIM on messages actually received; confirm DMARC alignment with the visible From domain.
-- [ ] Establish TLS and valid forward/reverse DNS with your sending provider.
-- [ ] Verify where each recipient came from, what they requested, and which suppression rules apply.
-- [ ] Test unsubscribe processing, including headers where required, and ensure scheduled messages respect new suppressions.
-- [ ] Separate transactional and promotional traffic, with appropriate access controls and limits.
-- [ ] Test the final MIME message, links, mobile rendering, text alternative, and reply handling.
-- [ ] Connect provider feedback and event webhooks; assign someone to respond to alerts.
-- [ ] Start with a representative, engaged segment and expand only when receiver feedback supports it.
-- [ ] Record a rollback plan before changing domains, providers, IPs, or DNS.
-
-### Evidence and scope
-
-Provider documentation is the authority for provider requirements. Standards define protocol behavior. Expert articles help explain operations, but anecdotes and vendor benchmarks are not universal rules. A published quota is a ceiling, not a safe sending target. Legal permission, provider permission, and recipient expectations are separate questions.
-
-This guide covers permission-based marketing, transactional email, and business correspondence. Recommendations are starting points for your own measured program. When a rule depends on recipient provider, message type, or jurisdiction, apply it to that scope rather than to all email.
+Use provider documentation for requirements, protocol standards for authentication behavior, and your own carefully measured results for operational decisions. Treat claims of guaranteed inboxing, fixed warmup timelines, and universal daily sending limits skeptically.
 
 ## Mailboxes
 

@@ -1,21 +1,15 @@
-import { Container } from '@/components/Container'
 import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
 import { Introduction } from '@/components/Introduction'
-import { NavBar } from '@/components/NavBar'
+import { GuideReader } from '@/components/GuideReader'
 
 export default function Home() {
   return (
     <>
+      <a className="skip-to-guide" href="#guide">Skip to the guide</a>
       <Hero />
       <Introduction />
-      <NavBar sections={GUIDE_SECTIONS} />
-      <main id="guide" className="py-16 sm:py-20 lg:py-24">
-        <Container
-          className="prose max-w-none break-words lg:prose-lg"
-          dangerouslySetInnerHTML={{ __html: GUIDE_HTML }}
-        />
-      </main>
+      <GuideReader html={GUIDE_HTML} chapters={GUIDE_SECTIONS} outline={GUIDE_OUTLINE} />
       <Footer />
     </>
   )

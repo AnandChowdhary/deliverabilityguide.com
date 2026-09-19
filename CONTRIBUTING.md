@@ -18,6 +18,8 @@ This project is exclusively about **outbound sales cold email**. Help sales team
 
 `README.md` is the content source. `scripts/generate.mjs` produces the site page and navigation from its headings; the generated page is gitignored. The generator includes content from the first level-two heading until the license section. Site introduction and metadata live separately in `site/src/components/` and `site/src/app/layout.tsx`; keep their audience consistent with the guide.
 
+The reader offers full text and a TL;DR view of the same sections. It reuses each section's opening TL;DR block when present; other summaries live in `site/src/data/guide-summaries.json`, keyed by the existing heading anchor. Keep summaries faithful to the author's advice and update them alongside content changes. The production generator rejects missing summaries. Preserve heading anchors so bookmarks and shared links work in both reading modes.
+
 Use Node.js 24 and npm:
 
 ```sh
@@ -35,4 +37,4 @@ npm run build --prefix site
 
 Both development and production commands regenerate the guide first. Production output is in `site/out/`. After editing Markdown during an active development session, run `npm run generate --prefix scripts` to regenerate the page.
 
-Before submitting a change, inspect the rendered table of contents, heading links, tables on mobile, code examples, and the remaining useful links. Describe what changed, the sources checked, and how you validated the result.
+Before submitting a change, inspect the chapter navigation and topic search, both reading modes, heading links, tables on mobile, code examples, and the remaining useful links. Check that “Read full section” preserves the reader's place and that the complete guide remains available without JavaScript. Describe what changed, the sources checked, and how you validated the result.

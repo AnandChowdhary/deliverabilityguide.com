@@ -57,7 +57,7 @@ export function Hero() {
               Practical, experience-based deliverability guidance for outbound
               sales cold email.
             </p>
-            <div className="mt-8 flex items-center gap-5">
+            <div className="mt-8 flex flex-wrap items-center gap-5">
               <a
                 className="gumroad-button"
                 href="https://anandchowdhary.gumroad.com/l/deliverability-guide"
@@ -66,10 +66,11 @@ export function Hero() {
                 Buy for $5 on
               </a>
               <p>or</p>
-              <Button href="#introduction" variant="outline">
+              <Button href="#guide" variant="outline">
                 Read for free
               </Button>
             </div>
+            <a href="?view=tldr#guide" className="mt-5 inline-block text-sm font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-slate-900">Short on time? Read the TL;DR →</a>
           </div>
         </div>
       </div>

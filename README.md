@@ -21,9 +21,11 @@ Deliverability involves judgment and experience as well as technical setup. Star
 - [ ] Schedule three follow-ups, 3–4 days apart, in the recipient’s timezone.
 - [ ] Keep spare domains warming and have three backup mailboxes for every five active ones.
 - [ ] Make sender identity accurate and opting out easy; synchronize stop requests across mailboxes and campaigns.
-- [ ] Test subject, personalization, links, rendering, and reply routing before launching.
+- [ ] Test subject, personalization, links, rendering, authentication, and reply routing through the actual sending tool at both Google and Microsoft.
 - [ ] Stop automated follow-ups when a prospect replies or opts out; pause out-of-office contacts until their return.
+- [ ] Start reply automation in manual review, exclude warming messages, and assign an owner to interested replies.
 - [ ] Be ready to pause new outreach and unanswered follow-ups across a troubled domain while continuing existing conversations.
+- [ ] Test automatic stop rules and keep message, thread, and delivery logs from the beginning.
 - [ ] Monitor recipient-provider errors, complaints, invalid-address failures, positive replies, and meetings.
 
 ### How to use this guide
@@ -187,7 +189,7 @@ Treat connections as production credentials: give tools only the access they nee
 
 #### Mailbox providers
 
-> **tl;dr:** Google Workspace remains our default recommendation for outbound mailboxes; Microsoft 365 is a strong alternative, especially for teams already using it.
+> **tl;dr:** Prefer Google Workspace or Microsoft 365 on branded domains you control. Prewarmed domains are an urgent-launch fallback; an unrelated domain can undermine credibility even when it is technically ready to send.
 
 Both give you established business email infrastructure, administrator controls, custom-domain authentication, and familiar inboxes for your sales team. Use their paid business offerings on domains you control. They reduce the operational work of running your own mail server, but your campaign, recipients, and sending behavior still matter.
 
@@ -196,6 +198,10 @@ When in doubt, start with Workspace. Microsoft 365 is our main alternative, espe
 One optimization we recommend is matching the prospect's provider: send to Google-hosted recipients from a Workspace mailbox and Microsoft-hosted recipients from a Microsoft mailbox. Check the recipient domain's MX records when choosing the sender for a new sequence. This is an experience-based preference, not a promise about every message. MX records sometimes point to a security gateway, so leave uncertain cases unclassified rather than guessing. Once a prospect is assigned, keep the same sender through the conversation.
 
 Before connecting a sales tool, check its supported authorization method, reply synchronization, bounce handling, and opt-out behavior. Confirm that the subscription and account remain under your company's control, including when a reseller supplies the mailbox.
+
+**Prewarmed domains are an emergency fallback for a launch that cannot wait.** Prefer your own branded domains whenever possible. Purchased stock domains often have no connection to your brand. Even if their mailboxes are ready to send, the recipient still sees an email from an unfamiliar, unrelated domain. That can feel suspicious and hurt your brand's credibility. A warmup score does not solve that problem, so we would not build a long-term outbound program around random prewarmed domains.
+
+If you use a prewarmed or managed setup, check who owns the domain and mailbox accounts, controls DNS and account recovery, and can transfer them later. Ask about prior sending history and what happens when you cancel: can you export your conversations, and will those inboxes keep receiving replies? Some offers provide rented access rather than ownership. Confirm the arrangement before putting real prospect conversations there, and test the actual setup before sending.
 
 Provider terms still apply. Google’s [acceptable-use policy](https://workspace.google.com/terms/use_policy/) prohibits unsolicited mass email and attempts to evade filtering; a paid subscription does not exempt a campaign from that policy. Microsoft treats bulk sending as unsupported except on a best-effort basis and can restrict users or organizations through its outbound controls.
 
@@ -216,7 +222,7 @@ When that happens:
 1. Pause **all new outreach on the domain**, across every mailbox and sending tool.
 2. Stop scheduled follow-ups to prospects who have never replied. Preserve their sequence position instead of leaving them queued to send.
 3. Keep replying to people already in a conversation, using the original mailbox and thread. A domain pause is not a reason to abandon interested prospects or move them to an unfamiliar sender.
-4. Keep warming while you investigate targeting, complaints, authentication, and recent changes. If the provider has restricted the account, resolve that restriction before sending more traffic.
+4. Keep warming while you investigate targeting, complaints, authentication, and recent changes, subject to provider restrictions and the [specific listing's recovery policy](#spam-traps-blocklists-and-recovery). Continuing warmup or waiting will not clear every blocklist entry.
 5. Use prepared, healthy domains for new campaigns once you have corrected any problem that would carry over. Synchronize opt-outs and prospect ownership first.
 
 Reassess the paused domain after a few weeks. When its condition has improved and the underlying issue is addressed, you can resume the unanswered campaigns from the **same domain**. Recheck whether the prospect and message are still relevant, space the remaining touches from the restart, and begin gently. Do not release several weeks of queued follow-ups in a burst or count the waiting period alone as proof of recovery.
@@ -259,6 +265,12 @@ Some deliverability practitioners recommend against automated warming, while oth
 
 Keep warming traffic separate in your reporting. Review actual prospect replies, bounces, delivery errors, and stop requests by mailbox and recipient provider. Check the permissions a warming service requests, how it handles mailbox data, and how to disconnect it. Confirm that your use of the tool and outreach program fits your mailbox provider's terms.
 
+Use the warming service's **content identifier** to recognize its messages before your sales automation processes them. Exclude them from lead creation, AI sales replies, prospect follow-up scheduling, and campaign reply metrics. Let the warming service handle its own exchanges. Check the filter whenever you connect a new service or inbox so a warming conversation cannot become a supposed sales opportunity.
+
+Treat those messages like ordinary inbox conversations: leave them in the inbox, archive them, or delete them if needed. **Do not mark them as spam.** Filtering them out of your sales workflow is separate from how the warming service manages its activity.
+
+If a blocklist identifies the warming activity itself as the reason for a listing, read its [recovery policy](#spam-traps-blocklists-and-recovery) before deciding what to do. More warming is not a universal remedy for a listed domain.
+
 ### For new mailboxes
 
 After creating the mailboxes, check authentication and reply handling, then start the warming service's gradual ramp. Do this for reserve domains too rather than waiting until a live domain has a problem.
@@ -297,7 +309,7 @@ After the initial ramp, keep warming. The service’s recommended defaults are u
 
 Keep these warming settings separate from your cold-outreach budget. As a sales sequence grows, yesterday's first touches create tomorrow's follow-ups. Review the combined queue before increasing prospect volume, and avoid catch-up bursts after an outage or pause.
 
-Track changes to the prospect source, copy, sending application, and authentication setup. If spam-placement problems appear, pause new outreach and unanswered follow-ups across the domain while keeping existing conversations going. Continue warming as you investigate, subject to any provider restriction. Save representative errors and headers so you can compare results after the fix.
+Track changes to the prospect source, copy, sending application, and authentication setup. If spam-placement problems appear, pause new outreach and unanswered follow-ups across the domain while keeping existing conversations going. Continue warming as you investigate, subject to provider restrictions and the specific cause of any listing. Save representative errors and headers so you can compare results after the fix.
 
 ### Positive and negative actions
 
@@ -326,6 +338,8 @@ That does not mean sending “Hi {firstName}” above the same generic pitch to 
 
 Write the first emails manually. Read the replies yourself and adjust the proposition until you see early signs of message-market fit. Then give a frontier AI model the successful examples and ask it to write similar, individually relevant emails. Automating a working pitch is much more useful than producing thousands of variations of an untested one.
 
+Use judgment to decide when the message is working well enough to expand. The quality of the replies and the conversations they start matters more than reaching a prescribed sample size or reply threshold. Read what people actually say, then grow gradually when the fit feels right.
+
 Keep the structure simple: why this person, the problem or opportunity, what you can do, and an easy question. Use **plain text, ideally no links**. For example:
 
 > Hi Alex — your careers page lists two platform-engineering roles focused on deployment tooling. We help infrastructure teams standardize release approvals across repositories. Would a short outline of the approach be useful?
@@ -342,7 +356,9 @@ There are two useful approaches, and both belong in the toolkit.
 
 Keep the underlying proposition consistent while varying the opening observation, relevant example, and question. The point is to express the same useful offer in a way that fits the prospect, not to change random words until the text looks different.
 
-Save the actual message sent, review samples, and compare qualified replies across audience segments. For deliberate experiments, change one important variable at a time. Keep sender identity, opt-out handling, and required disclosures consistent regardless of how the body is generated.
+Save the actual message sent, review samples, and compare qualified replies across audience segments. For deliberate experiments, change one important variable at a time, such as the problem you lead with or the offer. Compare similarly qualified prospects and spread variants across comparable senders and sending windows; a healthier domain or a better list should not get mistaken for better copy.
+
+Let the planned follow-ups run before comparing outcomes. One positive reply versus two is a reason to read the conversations, not proof of a winning template. Use judgment rather than a universal minimum sample or numerical trigger for scaling. Keep sender identity, opt-out handling, and required disclosures consistent regardless of how the body is generated.
 
 ### What not to include
 
@@ -392,7 +408,7 @@ Our preference is a simple reply-based opt-out: **“If this isn’t relevant, r
 
 We do not add a newsletter-style unsubscribe footer by default to a personal sales message. Where the sending program or applicable rules require a link or one-click mechanism, include it; the presence or absence of a link alone does not decide how a message is classified. Keep any required link clear and usable without an account login.
 
-Stop the sequence when a person replies, then classify the response. A positive reply goes to the account owner; a negative reply or opt-out stops contact. An out-of-office response should trigger the pause-and-return workflow in [Scheduling](#scheduling), not count as a qualified reply. Support plain-language requests, including “remove me,” and define how account-wide requests such as “stop emailing our team” are handled.
+Stop the cold sequence when a person replies, then classify the response. A positive reply goes to the account owner; a clear rejection or opt-out stops contact. A request to reconnect later belongs in the [postponement workflow](#postponed-conversations), not the rejection bucket. An out-of-office response should trigger the pause-and-return workflow in [Scheduling](#scheduling), not count as a qualified reply. Support plain-language requests, including “remove me,” and define how account-wide requests such as “stop emailing our team” are handled.
 
 Synchronize suppression across the CRM, sequencing tool, manual outreach workflow, agents, and alternate mailboxes. Check it again immediately before dispatch, not only when importing a prospect. An agency handoff or a fresh data-vendor export must not revive a suppressed contact. Preserve the scope, date, and source of the request with appropriate access and retention controls.
 
@@ -445,7 +461,7 @@ If you keep pixels enabled, use the results as supporting context rather than th
 
 This is where we would spend about **80% of the effort**. Qualification comes before clever copy: find the buyer who has the problem you solve, and the message becomes much easier to write.
 
-Build the smallest useful list for a specific sales hypothesis. Keep a record of why each account and role fit, where contact data came from, when it was checked, and what rules permit contact. Exclude existing opt-outs, customers owned by another workflow, ongoing opportunities, and accounts already assigned to a colleague where additional outreach would conflict.
+Build the smallest useful list for a specific sales hypothesis. Keep a record of why each account and role fit, where contact data came from, when it was checked, and what rules permit contact. Exclude existing opt-outs and contacts already handled by another workflow where additional outreach would conflict. An open opportunity at a company does not automatically exclude every other relevant person there; coordinate those conversations through a shared account history.
 
 ### Targeting
 
@@ -454,6 +470,8 @@ Define the account criteria before collecting addresses: business model, geograp
 Use your best existing customers as a starting point. AI can help identify the characteristics they share, find lookalike companies, and research the right role within each one. Give it the reason those customers bought and the problem you solved, not just a list of logos. Review the resulting accounts and people before putting them into a sequence.
 
 Use one accountable owner per account and a shared contact history. Set documented contact and account caps across all sales tools; choose them for the audience and program rather than adopting a claimed universally safe number. Review small cohorts manually before expanding them. When replies repeatedly say “wrong person,” fix the role selection instead of sending more follow-ups.
+
+**One person engaging is not a reason to stop talking to everyone else at the company.** Multiple relevant relationships give you more ways to understand the problem and keep an opportunity moving, especially when someone drops out. Keep each conversation useful and aware of the others. As the deal reaches buying readiness, bring people together: “I'm discussing this with your colleague; shall we include everyone in the same conversation?” Adjust the next message to the account's situation rather than applying an automatic account-wide stop.
 
 Treat a data vendor as a source of leads, not a substitute for knowing your audience. Check where the records came from, how fresh they are, and whether the people match your target profile. A list that is technically valid can still produce poor replies and complaints. Check the rules that apply to your campaign before sending.
 
@@ -477,6 +495,8 @@ MX verification is a useful baseline, but it only tells you about the domain’s
 
 Verification reduces avoidable addressing errors; it does not prove inbox placement, interest, or consent. Keep valid, invalid, accept-all, and unknown results separate. Recheck stale records before a new campaign, but do not repeatedly probe or mail unknown addresses to force a verdict.
 
+**Put catch-all and unknown addresses at the bottom of the list.** Work through well-qualified, verified prospects first. If you run out of stronger leads, you can revisit those uncertain addresses; additional research or a current public source supporting the exact address can also move one up the list. They are optional prospects, not automatically unusable. Keep the verification status and supporting source visible, and review their results separately instead of relabeling them as verified.
+
 Check syntax and domain configuration with a maintained parser. A missing MX can fall back to address records; `MX 0 .` explicitly says the domain accepts no email. A DNS timeout is not proof that a domain is nonexistent.
 
 Offer typo corrections for confirmation rather than silently changing the recipient. Do not universally strip dots or `+tags`; even Google's own dot-equivalence behavior differs between consumer Gmail and organizational domains. Check international-address support in the sending platform instead of declaring all non-ASCII addresses invalid.
@@ -485,7 +505,7 @@ Preserve full bounce diagnostics. `550 5.1.1` indicates an invalid destination m
 
 ### Scheduling
 
-> **tl;dr:** Send an initial email followed by three follow-ups, spaced 3–4 days apart. Stop the sequence when someone responds or opts out, and pause out-of-office contacts until they return.
+> **tl;dr:** Send an initial cold email followed by three follow-ups, spaced 3–4 days apart. A real reply ends that sequence and starts a contextual conversation: answer interested prospects within an hour where possible, respect requested delays, and wait until people return from leave.
 
 Three follow-ups is our default. In our analysis across FirstQuadrant customers, two left opportunities behind: the third still brought replies from people who had not answered earlier. A fourth generally felt like too much. This is why we prefer three follow-ups rather than either giving up after two or extending a sequence indefinitely.
 
@@ -495,11 +515,48 @@ Give each follow-up a reason to exist: a useful clarification, a relevant exampl
 
 You can also coordinate a multichannel campaign: an email, a LinkedIn connection request, a LinkedIn message, and later emails. Keep one shared contact history and account owner. A reply on LinkedIn should stop an inappropriate automated email follow-up just as a reply by email would. Count the combined pressure across channels rather than treating each channel as a separate unlimited sequence.
 
-Set up an **out-of-office automation**. When the reply gives a clear return date, pause the sequence and schedule the next follow-up after the person is back, during their local working hours. Personalize it from what they actually said: “Hope your vacation was good” if they mentioned a vacation, or simply “Welcome back” otherwise. If the date is missing or ambiguous, send the contact for review rather than guessing. Keep this message within the planned sequence rather than adding an unlimited extra round of follow-ups.
-
-Automatic responses—including out-of-office messages and bounce notifications—are not human replies. Do not count them toward the reply rate or treat them as buying interest. A real answer stops the automated sequence and moves the conversation to its owner.
+Automatic responses—including out-of-office messages and bounce notifications—are not human replies. Do not count them toward the reply rate or treat them as buying interest. A real answer stops the original cold sequence and moves the conversation to its owner, who decides the appropriate reply and follow-up plan.
 
 Check reply state, suppression, domain status, ownership, and contact caps immediately before every send. If a domain is paused for reputation problems, stop the scheduled follow-ups to prospects who have never replied, while continuing existing conversations from their original inboxes. Once that same domain is healthy again, recheck eligibility and resume the remaining sequence gently. An opt-out stays suppressed even after the domain recovers.
+
+#### Interested replies and follow-ups
+
+**Answer interested prospects as soon as possible; aim for within an hour.** Give them the information they asked for and make the next step easy. Answer the question first, then offer a call: “Happy to go through this on a call if useful.” Offer straightforward scheduling when they are ready. Do not let a good lead disappear into an unmonitored reply inbox.
+
+If they stop replying after your answer, keep following up about that conversation. Use a gentler cadence than the cold sequence: weekly is a reasonable starting point, while 3–4 days can also fit an active discussion. Refer to the question, information, or next step you discussed instead of restarting the original pitch. Give the conversation a clear owner and a considered follow-up plan.
+
+Recheck the context before a scheduled message goes out. If a meeting is already booked, replace “Would you like to book a call?” with an appropriate next step, or cancel it if there is nothing useful to add. If a teammate takes over, let that person own the response and remove competing automation. Another colleague at the prospect's company engaging is useful context, not an automatic reason to end every other conversation. Bring those threads together when the opportunity reaches buying readiness.
+
+#### Postponed conversations
+
+“Not now” is different from “not interested.” A simple LLM prompt can turn the prospect's reply into structured information: the reason for the delay, the appropriate follow-up date, and the wording that supports it. Give the model the original reply, the date it arrived, the current date, and the recipient's timezone so relative requests such as “next quarter” have context. If no date can reasonably be determined, flag the case for the owner instead of inventing a precise commitment.
+
+Confirm the timing where appropriate, stop the ordinary nudges, and create the future action. Record who owns it, why it exists, and whether it is an internal reminder or an email scheduled to send. When that date arrives, use the conversation history and current account context to write the message. Do not layer generic follow-ups on top of an existing reminder.
+
+For a delay of several months, **one interim update can be worthwhile only when both conditions hold**:
+
+- You have a major update that addresses something the prospect cares about or removes a blocker they discussed.
+- They postponed for budget, business timing, or a similar reason while continuing their normal work; they are not away on leave.
+
+For example, halfway through an agreed three-month wait: “I know we're reconnecting when next quarter starts, but we just released the approval workflow you asked about and I wanted to flag it.” Keep the agreed follow-up date. This is one relevant update, not a new sequence of nudges.
+
+#### Out-of-office replies
+
+Set up an **out-of-office automation**. When the reply gives a clear return date, pause the sequence and schedule the next follow-up after the person is back, during their local working hours. If the date is missing or ambiguous, send the contact for review. **Send no interim nudges during a holiday, maternity leave, or other absence**, even if you have a product update. Resume with a personalized welcome-back message: “Hope your vacation was good” if they mentioned a vacation, or simply “Welcome back” otherwise. Keep this within the remaining planned sequence rather than adding an unlimited extra round of follow-ups.
+
+Out-of-office replies often name someone in a similar role. If that colleague is a relevant buyer, reach out: it gives you a warmer opening than approaching someone without context. Verify their role and address, and check whether your team is already contacting them before creating another sequence. An alternate for urgent matters is not automatically the person responsible for your topic.
+
+**Describe the referral accurately:** “I emailed Sarah, and her out-of-office message listed you as an alternate contact.” Then explain why the topic is relevant to them. Do not say “Sarah introduced us” or “Sarah recommended I contact you” unless she actually did. We have had the original contact return and point out that they never made an introduction; precise wording avoids that mistake while keeping the useful context. Coordinate the new conversation with the original person's eventual return, rather than blindly sending duplicate pitches.
+
+#### Automating reply handling
+
+Start with **everything in manual review**, then gradually move reliable situations into autopilot. Keep high-value conversations, especially positive replies, more hands-on. Routine out-of-office handling and clear negative replies can become automatic sooner. Automatic handling may mean pausing a sequence, scheduling a future action, or stopping contact; it does not always call for another email.
+
+If the AI cannot answer a question, give the owner a task to supply the missing information. Save the answer as reusable knowledge for future responses. Review ambiguous classifications, especially the difference between a rejection, a request to reconnect later, and a genuine opt-out. Keep warming messages out of this workflow using the service's content identifier.
+
+Test the safeguards rather than trusting an “automatic protection” switch. Know each rule's trigger, minimum sample size, time window, and scope. A bounce rule that only starts checking after many sends may react too late for a small campaign. Review early results yourself, and test reply and opt-out handling with inboxes you control, including a reply arriving just before the next scheduled touch.
+
+Confirm that a domain pause reaches every connected campaign and removes the appropriate queued follow-ups. Some tools' soft-stop controls prevent new sequences but finish ones already started; that does not implement this guide's domain pause. Keep these controls distinct: a snoozed task returns for review, a scheduled email sends later, a human takeover removes competing automation, and an opt-out remains suppressed. Check that each one does what your team expects.
 
 #### Days and timezones
 
@@ -530,7 +587,7 @@ Measure the path from valid attempt to useful sales conversation. An ESP’s “
 | Acceptance rate | Recipient-message pairs accepted divided by pairs attempted; exclude intentionally suppressed records |
 | Invalid-address rate | Confirmed invalid-address failures divided by attempted recipient-message pairs |
 | Policy rejections and deferrals | Separate categories by receiving provider and diagnostic reason |
-| Human reply rate | Distinct prospects giving a human response divided by prospects contacted; exclude out-of-office, bounce, and other automatic messages |
+| Human reply rate | Distinct prospects giving a human response divided by prospects contacted; exclude warming traffic, out-of-office, bounce, and other automatic messages |
 | Positive reply rate | Distinct prospects expressing relevant, qualified interest divided by prospects contacted; make this the main reply metric and document the classification |
 | Qualified meetings held | Meetings that occurred and met written qualification criteria; report booked meetings separately |
 | Opportunities and pipeline | Sales outcomes attributed to the cohort using a stated observation window |
@@ -542,7 +599,31 @@ Break down results by audience segment, acquisition source, sender, domain, rece
 
 Complaint visibility is incomplete. Gmail complaints will not necessarily appear as individual events in your sequencing tool; check Google Postmaster Tools as well. Zero complaints in a sequencing dashboard is therefore not proof of zero complaints. Keep provider-defined rates distinct from your own formulas.
 
-Use seed inboxes and placement tests to investigate, not to promise a percentage for real prospects. A clean blocklist check and passing authentication also do not guarantee inbox placement. Before expanding a campaign, review its positive outcomes, negative signals, address quality, and provider-level failures together. If spam placement deteriorates, pause new outreach and unanswered follow-ups across the domain, keep existing conversations going, and investigate before allocating more traffic.
+Before expanding a campaign, review its positive outcomes, negative signals, address quality, and provider-level failures together. If spam placement deteriorates, pause new outreach and unanswered follow-ups across the domain, keep existing conversations going, and investigate before allocating more traffic.
+
+### Testing inbox placement
+
+**Run a cross-provider placement test every few weeks and whenever you change the sending setup.** Many warming services offer a spam-test product: you send an email to their test addresses across receiving providers, and they report placement and a score. Use these alongside tests to Google and Microsoft inboxes you control.
+
+Send through the actual tool, connection, and configuration used by the campaign. Check the final received message's SPF, DKIM, and DMARC results, formatting, links, and reply behavior. Repeat after changes to authentication, providers, sequencing tools, signatures, or tracking. If Google accepts a message and Microsoft rejects it, compare the full error and raw message headers before assuming the DNS records are wrong. A sending tool or gateway can change the message after your editor preview, and a DNS checker cannot inspect those changes.
+
+Save the results and configuration so the next test has a useful baseline. Scores and seed placement are diagnostic signals, not a promise of how every real prospect will receive your email. Passing authentication and a clean blocklist check also do not guarantee inbox placement; compare tests with actual prospect replies and provider errors.
+
+### Message logs and troubleshooting
+
+**Keep detailed logs from the beginning. In this business, more useful history is better than less.** You need to reconstruct an individual conversation when something goes wrong and analyze patterns across campaigns later. Authentication and DMARC problems are only one reason to keep that history.
+
+| Record | What to retain |
+| --- | --- |
+| Message and conversation | Message ID, provider message ID, thread or conversation ID, and reply-reference headers where available |
+| Sending context | Sender, recipient, domain, mailbox, campaign, sequence step, and the actual message sent |
+| Timing and delivery | Scheduled and actual send times with timezone, acceptance, deferrals, retries, bounces, and full provider responses |
+| Authentication and placement | Received headers, SPF/DKIM/DMARC results, available DMARC reports, placement-test results, and the configuration tested |
+| Workflow decisions | Reply classification, owner, suppression state, pause or reschedule reason, requested future date, and automated or manual actions taken |
+
+Keep the identifiers that connect events across the mailbox provider, sequencer, and CRM. An internal thread ID alone may not help a provider trace a message; retain the email's Message-ID and the provider's own identifier as well. Make the history searchable by contact, domain, campaign, and message, with access and retention appropriate to the customer data it contains.
+
+When an engaged prospect says an expected email never arrived, collect its identifiers, addresses, send time, headers, and any error response for your provider's support team. The prospect's administrator may also be able to check quarantine, routing, or message traces. Do not repeatedly resend while the original attempt's state is unclear. Use the same event history for later analytics so a dashboard result can be traced back to what actually happened.
 
 ### Google Postmaster Tools and provider feedback
 
@@ -575,6 +656,10 @@ Avoid automatically sending the same message from a backup mailbox while the ori
 
 If a tool reports a listing, establish whether it concerns your sending IP, domain, or a link domain, and which operator maintains it. Check the operator's own lookup and instructions. For example, Spamhaus provides an official [reputation checker](https://check.spamhaus.org/). A clean result from one checker does not describe every receiver's private filtering decisions.
 
+**Recovery depends on the specific listing.** Read its removal policy before assuming a few weeks of rest will fix it. Some lists retain historical observations. For example, [Heatwave's listing policy](https://lookup.validity.tools/listing-policy) treats a confirmed synthetic-warming observation as permanent: stopping the activity or changing sending practices does not erase it, while a review can remove an erroneous finding. Continuing to warm will not clear that entry either. Receivers decide how to use the signal; a listing does not mean every provider blocks the domain.
+
+Distinguish improving actual delivery from clearing a particular blocklist entry. Check whether the warming activity itself caused the listing and what, if any, recovery route the operator offers. If a valid entry has no removal path and receivers you need are filtering on it, do not keep treating the domain as a ready reserve merely because time has passed. Review its future use against actual delivery and the operator's policy.
+
 Treat a suspected spam-trap issue as a reason to examine data provenance, stale contacts, imports, and verification handling. An address vendor's “valid” label cannot tell you that a person wants your message. If you use shared infrastructure, preserve the evidence and involve the mailbox provider; you may not control the listed IP.
 
 Our recovery checklist:
@@ -583,7 +668,7 @@ Our recovery checklist:
 2. For a reputation problem, pause new outreach and unanswered follow-ups across the affected domain. Keep existing conversations on their original mailboxes and preserve all opt-outs.
 3. Compare the last healthy cohort with the first unhealthy one: list source, copy, links, volume, authentication, and tool configuration.
 4. Fix the cause and follow the provider or blocklist operator's process where required.
-5. Keep warming where permitted, then reassess after a few weeks. When the domain improves and the cause is corrected, test the repaired setup and resume eligible campaigns on that same domain with a small, closely watched cohort. Keep missed touches from bunching together.
+5. Keep warming where permitted and appropriate to the diagnosed issue, then reassess after a few weeks. Follow the specific listing policy rather than assuming rest or warming clears it. When delivery improves and the cause is corrected, test the repaired setup and resume eligible campaigns on that same domain with a small, closely watched cohort. Keep missed touches from bunching together.
 6. Record the change and review actual prospect delivery, replies, and meetings before scaling again.
 
 ### A weekly sales-deliverability review
@@ -591,6 +676,8 @@ Our recovery checklist:
 Review delivery and commercial results together. For each active domain and mailbox, record volume, first touches versus follow-ups, failed addresses, provider-specific errors, stop requests, human replies, positive replies, meetings booked, and meetings held. Review account-level contact pressure too: several individually modest sequences can still overwhelm one company.
 
 Assign an owner to each problem and decide whether to continue, adjust targeting or copy, reduce volume, or pause. Keep a change log with cohort dates so you can learn from experience instead of repeatedly changing several variables and guessing which mattered.
+
+Review interested replies that have not been answered and conversations with no next action. Every postponed prospect should have an owner, a reason, and a clear date or review task. Check that upcoming messages still fit the latest email, meeting, and account context, and that warming traffic has stayed out of lead processing and sales metrics. Use the message logs to investigate gaps instead of guessing from a summary score.
 
 ## 📄 License
 

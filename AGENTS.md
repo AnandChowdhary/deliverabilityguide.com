@@ -15,6 +15,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), the affected README sections, and the r
 
 The skills live in `.agents/skills/`. If an agent cannot discover them automatically, open the linked `SKILL.md` directly. Each skill is scoped to this project and links to its supporting references.
 
+For a recurring research update, run [tasks/monthly.md](tasks/monthly.md). It loads these skills, reviews the previous calendar month's developments, and opens a PR; its PR-only release instructions override the normal direct-publishing workflow for that task.
+
 ## Editorial constraints
 
 - Write as an experienced operator: direct, concrete advice, practical defaults, and useful examples. Do not turn the guide into an academic literature review.

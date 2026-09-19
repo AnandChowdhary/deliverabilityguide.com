@@ -1,0 +1,23 @@
+name: Check guide
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            scripts/package-lock.json
+            site/package-lock.json
+      - run: npm ci --prefix scripts
+      - run: npm test --prefix scripts
+      - run: npm ci --prefix site
+      - run: npm run build --prefix site

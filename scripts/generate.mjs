@@ -28,7 +28,12 @@ export function renderGuide(markdown) {
   const sections = headings.filter(([, level]) => level === "2").map(([, , id, title]) => ({
     id, title: title.replace(/<[^>]*>/g, ""),
   }));
-  const contents = `<nav aria-label="Table of contents" class="guide-contents"><h2 id="contents">On this page</h2><ul>${headings.map(([, level, id, title]) => `<li class="toc-level-${level}"><a href="#${id}">${title}</a></li>`).join("")}</ul></nav>`;
+  const groups = [];
+  for (const [, level, id, title] of headings) {
+    if (level === "2") groups.push({ id, title, children: [] });
+    else groups.at(-1)?.children.push({ id, title });
+  }
+  const contents = `<nav aria-label="Table of contents" class="guide-contents"><h2 id="contents">On this page</h2><ul>${groups.map(({ id, title, children }) => `<li class="toc-section"><a href="#${id}">${title}</a>${children.length ? `<ul>${children.map(child => `<li><a href="#${child.id}">${child.title}</a></li>`).join("")}</ul>` : ""}</li>`).join("")}</ul></nav>`;
   return { html: contents + html, sections };
 }
 

@@ -59,10 +59,10 @@
 
 .guide-contents h2 { margin-top: 0; }
 .guide-contents ul { list-style: none; padding: 0; }
-.guide-contents li { break-inside: avoid; }
-.guide-contents .toc-level-2 { font-weight: 700; margin-top: 1rem; }
-.guide-contents .toc-level-3 { font-size: 0.875em; padding-left: 1rem; }
+.guide-contents .toc-section { break-inside: avoid; padding-top: 0.5rem; }
+.guide-contents .toc-section > a { font-weight: 700; }
+.guide-contents .toc-section ul { font-size: 0.875em; margin-top: 0.5rem; padding-left: 1rem; }
 
 @media (min-width: 768px) {
-  .guide-contents ul { columns: 2; column-gap: 2rem; }
+  .guide-contents > ul { columns: 2; column-gap: 2rem; }
 }

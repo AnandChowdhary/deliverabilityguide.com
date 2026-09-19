@@ -14,14 +14,15 @@ function Testimonial() {
       <blockquote className="mt-2">
         <p className="font-display text-xl font-medium text-slate-900">
           “There are no deliverability experts, Anand is a total snake oil
-          salesman. But yeah he&rsquo;s my cofounder.”
+          salesman. But yeah he&rsquo;s my cofounder, and we exited a YC-backed
+          AI outbound sales platform startup, so he knows a thing or two.”
         </p>
       </blockquote>
       <figcaption className="mt-2 text-sm text-slate-500">
         <strong className="font-semibold text-slate-600 before:content-['—_']">
           Carlo Badini
         </strong>
-        , co-founder of Pabio
+        , co-founder of FirstQuadrant
       </figcaption>
     </figure>
   )

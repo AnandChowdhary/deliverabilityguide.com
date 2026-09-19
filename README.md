@@ -4,7 +4,7 @@
 
 If you're sending outbound sales emails, you should follow this checklist to give your emails the best chance of reaching the inbox instead of spam. This checklist is based on the experience of sending tons of outbound emails, and it's open source to keep the information recent and relevant. Contributions are welcome!
 
-Deliverability involves judgment and experience as well as technical setup. The recommendations here are a practical starting point: adapt them to your audience, mailboxes, and results. Research and provider updates build on that experience as the guide evolves.
+Deliverability involves judgment and experience as well as technical setup. Start with the settings we recommend, pay attention to what happens in your own campaigns, and adjust as you learn. What works for one audience or mailbox will not always work for another.
 
 ## Start here
 
@@ -27,19 +27,21 @@ Start with your domains and mailboxes, work through warming and content, then re
 
 When diagnosing a problem, distinguish server acceptance, inbox placement, and sales outcomes. A message can be accepted but reach spam, and a tracked open is not the same as an interested prospect. Look at the whole sequence, from first touch through replies and meetings.
 
-### Latest technical review
+<span id="latest-technical-review"></span>
 
-Provider and standards sources were checked on **September 19, 2026**. These updates supplement the original outbound playbook; suggested settings remain practical starting points.
+### Adjust as you go
+
+Treat your first campaign as a chance to learn. Keep the setup simple enough that you can tell what changed, review replies yourself, and build volume as you find the right audience and message. When something stops working, go back to the last healthy campaign before changing several things at once.
 
 ### Provider requirements for cold outbound
 
 Calling a message “one-to-one sales” does not automatically remove its promotional purpose or exempt it from provider rules. Evaluate the actual message and sending program. Where bulk-sender marketing requirements apply, a personalized first line or a salesperson's signature does not replace the required unsubscribe implementation.
 
-For personal Gmail, bulk classification combines traffic from the same primary domain at approximately 5,000 messages in 24 hours and remains permanent once assigned. Multiple sales mailboxes and subdomains do not create separate exemptions. Bulk senders need SPF, DKIM, DMARC, RFC 8058 one-click unsubscribe for promotional mail, and a visible body link; Gmail's body-only or `mailto:` opt-out does not satisfy that header requirement. Honor requests within 48 hours. These specific receiving rules cover personal Gmail, not every Google Workspace prospect. Google says enforcement intensified in November 2025. [Google sender FAQ](https://support.google.com/mail/answer/14229414?hl=en)
+For personal Gmail, [Google’s bulk-sender rules](https://support.google.com/mail/answer/14229414?hl=en) count traffic across your primary domain. Once you reach approximately 5,000 messages in 24 hours and are classified as a bulk sender, that classification stays with you. Multiple sales mailboxes and subdomains do not create separate exemptions. Bulk senders need SPF, DKIM, DMARC, RFC 8058 one-click unsubscribe for promotional mail, and a visible body link; Gmail's body-only or `mailto:` opt-out does not satisfy that header requirement. Honor requests within 48 hours. These specific receiving rules cover personal Gmail, not every Google Workspace prospect.
 
-Yahoo does not publish a numeric bulk threshold. Its rules include Yahoo-hosted consumer brands such as AOL. Marketing bulk senders need authenticated, aligned mail and an easy opt-out; Yahoo accepts `mailto:` while recommending RFC 8058. Opt-outs must be honored within two days, and reported spam rates must stay below 0.3%. [Yahoo FAQ](https://senders.yahooinc.com/faqs/), [Yahoo requirements](https://senders.yahooinc.com/best-practices/)
+[Yahoo’s sender requirements](https://senders.yahooinc.com/best-practices/) do not specify a numeric bulk threshold. Its rules include Yahoo-hosted consumer brands such as AOL. Marketing bulk senders need authenticated, aligned mail and an easy opt-out; Yahoo accepts `mailto:` while recommending RFC 8058. Opt-outs must be honored within two days, and reported spam rates must stay below 0.3%.
 
-Microsoft consumer services enforce high-volume SPF, DKIM, and DMARC requirements and can reject failures with `550 5.7.515`. Current support guidance describes 5,000 or more messages using the same From domain. A prospect's corporate Microsoft 365 tenant can additionally apply its own controls. Authentication identifies the sender; it does not certify that cold sales contact is wanted or permitted. [Microsoft authentication troubleshooting](https://support.microsoft.com/en-us/outlook/fix-ndr-error-550-5-7-515-in-outlook-com)
+Microsoft consumer services enforce high-volume SPF, DKIM, and DMARC requirements and can reject failures with [`550 5.7.515`](https://support.microsoft.com/en-us/outlook/fix-ndr-error-550-5-7-515-in-outlook-com). Current support guidance describes 5,000 or more messages using the same From domain. A prospect's corporate Microsoft 365 tenant can additionally apply its own controls. Authentication identifies the sender; it does not certify that cold sales contact is wanted or permitted.
 
 Maintain a shared suppression record for explicit stop requests and complaints, remove queued follow-ups, and verify that newly imported prospects cannot silently reactivate suppressed contacts. Check both your sending provider's acceptable-use policy and the rules applying to the recipient before launching outreach. Meeting a mailbox provider's technical requirements is not permission to send.
 
@@ -47,7 +49,7 @@ Maintain a shared suppression record for explicit stop requests and complaints, 
 
 Cold outbound sales starts with a credible sender identity, a working reply inbox, and authentication that survives the actual sending tool. A newly purchased domain or paid mailbox is not automatically ready for prospecting. Before starting a sequence, test the complete path: connection, sending, receipt, reply, bounce processing, and opt-out suppression.
 
-This guide builds on practical experience running outbound sales. Start conservatively, keep the setup understandable, and adjust it as you learn what works for your audience. Sources for the technical updates were checked on September 19, 2026.
+This guide builds on practical experience running outbound sales. Start conservatively, keep the setup understandable, and adjust it as you learn what works for your audience.
 
 ### Additional domains
 
@@ -59,7 +61,7 @@ For example, if your primary domain is `example.com`, you might use `examplehq.c
 
 Our preference for `.com` is a practical branding choice: it is familiar and easy for prospects to recognize. Other established extensions can work, especially where they fit your country or brand. The extension alone does not determine delivery, and buying more domains does not fix an irrelevant campaign.
 
-Microsoft's own guidance recommends separating bulk activity from the primary domain and suggests a dedicated subdomain. A separate registered domain, as recommended here for outbound, is another operational choice; neither arrangement is a complete reputation firewall. [Microsoft outbound guidance](https://learn.microsoft.com/en-us/defender-office-365/outbound-spam-protection-about).
+We prefer a separate registered domain for outbound, though a dedicated subdomain can also help organize your sending. Either way, keep an eye on the wider brand: prospects still see your company name, links, and message.
 
 Keep an inventory of each domain's owner, renewal date, mailbox provider, active representatives, and DNS records. Secure the registrar account and set renewal reminders. Keep domains receiving replies when you retire them from new campaigns so that existing prospect conversations are not lost.
 
@@ -67,7 +69,7 @@ Keep an inventory of each domain's owner, renewal date, mailbox provider, active
 
 > **tl;dr:** Set up SPF, DKIM, and DMARC for every outbound domain. Test actual messages before tightening your DMARC policy.
 
-Inspect the received message's raw headers. The visible `From:` domain, envelope sender reflected in `Return-Path`, and DKIM `d=` signing domain are different identities. A branded display name or `Reply-To` does not make authentication align. Your platform might send through the connected mailbox or through separate infrastructure; establish which before editing DNS. [Google's authentication and alignment guide](https://knowledge.workspace.google.com/admin/security/set-up-dmarc).
+Inspect the received message's raw headers. The visible `From:` domain, envelope sender reflected in `Return-Path`, and DKIM `d=` signing domain are different identities. A branded display name or `Reply-To` does not make authentication align. Your platform might send through the connected mailbox or through separate infrastructure; establish which before editing DNS.
 
 Run these read-only checks with your own domain and active selector:
 
@@ -86,63 +88,63 @@ These inspect DNS; they do not verify a particular message's DKIM signature or e
 
 ##### SPF
 
-SPF checks whether the connecting server is authorized for the **envelope sender domain**, not whether the visible author is genuine. Publish one SPF TXT record for that domain. Multiple `v=spf1` records cause an error. [SPF specification](https://www.rfc-editor.org/rfc/rfc7208.html).
+SPF checks whether the connecting server is authorized for the **envelope sender domain**, not whether the visible author is genuine. Publish one SPF TXT record for that domain. Multiple `v=spf1` records cause an error.
 
-If Google Workspace is your only sending service for the domain, Google's documented example is:
+If Google Workspace is your only sending service for the domain, its [SPF setup instructions](https://support.google.com/a/answer/33786) use this record:
 
 ```text
 v=spf1 include:_spf.google.com ~all
 ```
 
-This is not a universal record for every configuration. If a sales tool uses your connected Workspace mailbox, do not automatically add the tool's infrastructure to SPF. If it sends independently, follow its actual authentication instructions. [Google SPF setup](https://support.google.com/a/answer/33786).
+This is not a universal record for every configuration. If a sales tool uses your connected Workspace mailbox, do not automatically add the tool's infrastructure to SPF. If it sends independently, follow its actual authentication instructions.
 
-`~all` returns softfail for unmatched servers; `-all` returns fail; `?all` returns neutral; `+all` authorizes everything and defeats useful authorization. These are authentication results, **not instructions guaranteeing inbox, spam-folder, or rejection outcomes**. [SPF result handling](https://www.rfc-editor.org/rfc/rfc7208.html#section-8).
+`~all` returns softfail for unmatched servers; `-all` returns fail; `?all` returns neutral; `+all` authorizes everything and defeats useful authorization. These are authentication results, **not instructions guaranteeing inbox, spam-folder, or rejection outcomes**.
 
-SPF evaluation permits at most ten DNS-querying terms across nested policies, including `include`, `a`, `mx`, `exists`, `ptr`, and `redirect`. The limit is not ten visible includes. Exceeding it causes `permerror`; DNS timeouts can cause `temperror`. [SPF processing limits](https://www.rfc-editor.org/rfc/rfc7208.html#section-4.6.4).
+SPF evaluation permits at most ten DNS-querying terms across nested policies, including `include`, `a`, `mx`, `exists`, `ptr`, and `redirect`. The limit is not ten visible includes. Exceeding it causes `permerror`; DNS timeouts can cause `temperror`.
 
-Remove obsolete authorizations when retiring tools. Inspect nested includes, leave room for provider changes, and avoid manually flattening a vendor's addresses into a static list without maintaining it. Several quoted strings inside one TXT record can hold a long policy; several separate SPF records cannot. [M3AAWG SPF guidance](https://www.m3aawg.org/sites/default/files/doc_files/m3aawg_managing-spf_records-2017-08.pdf).
+Remove obsolete authorizations when retiring tools. Inspect nested includes, leave room for provider changes, and avoid manually flattening a vendor's addresses into a static list without maintaining it. Several quoted strings inside one TXT record can hold a long policy; several separate SPF records cannot.
 
 ##### DKIM
 
-DKIM signs message content and selected headers with a domain's key. The receiver looks up the selector in DNS: `s=google; d=examplehq.com` points to `google._domainkey.examplehq.com`. Publishing the key is only part of setup; the sending service must actually sign your messages. [DKIM specification](https://www.rfc-editor.org/rfc/rfc6376.html).
+DKIM signs message content and selected headers with a domain's key. The receiver looks up the selector in DNS: `s=google; d=examplehq.com` points to `google._domainkey.examplehq.com`. Publishing the key is only part of setup; the sending service must actually sign your messages.
 
-For Google Workspace, generate the domain's key, publish the supplied TXT record, and start authentication in the Admin console. [Google DKIM setup](https://support.google.com/a/answer/174124).
+For Google Workspace, follow the [DKIM setup steps](https://support.google.com/a/answer/174124): generate the domain’s key, publish the supplied TXT record, and start authentication in the Admin console.
 
-For Microsoft 365 custom domains, retrieve the exact CNAME targets from your tenant and enable DKIM. Do not reconstruct targets from an old blog example: Microsoft has changed the target format, and the values are tenant-specific. Confirm that received mail has your intended custom domain in `d=`. [Microsoft DKIM configuration](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-dkim-configure).
+For Microsoft 365 custom domains, use the [DKIM configuration guide](https://learn.microsoft.com/en-us/defender-office-365/email-authentication-dkim-configure) to retrieve the exact CNAME targets from your tenant and enable signing. Do not reconstruct targets from an old blog example: Microsoft has changed the target format, and the values are tenant-specific. Confirm that received mail has your intended custom domain in `d=`.
 
-Prefer 2048-bit RSA keys where supported; the DKIM cryptographic update recommends them and prohibits SHA-1. [DKIM cryptographic requirements](https://www.rfc-editor.org/rfc/rfc8301.html).
+Use 2048-bit RSA keys where supported, and avoid obsolete SHA-1 signing.
 
-If a tracking system, signature service, or outbound gateway modifies signed content afterward, DKIM can fail. Test the final received message. For rotation, publish a new selector before switching signing and retain the old public key while previously signed mail can still be in transit. [DKIM operations](https://www.rfc-editor.org/rfc/rfc6376.html#section-5).
+If a tracking system, signature service, or outbound gateway modifies signed content afterward, DKIM can fail. Test the final received message. For rotation, publish a new selector before switching signing and retain the old public key while previously signed mail can still be in transit.
 
 ##### DMARC
 
-DMARC passes when **either** SPF passes and aligns with the visible `From:` domain, **or** a valid DKIM signature aligns. It does not fail merely because one mechanism fails. Relaxed alignment permits the same organizational domain; strict alignment requires an exact domain match. [Google DMARC alignment guidance](https://knowledge.workspace.google.com/admin/security/set-up-dmarc).
+DMARC passes when **either** SPF passes and aligns with the visible `From:` domain, **or** a valid DKIM signature aligns. It does not fail merely because one mechanism fails. Relaxed alignment permits the same organizational domain; strict alignment requires an exact domain match.
 
 For example, `From: alex@examplehq.com` and a passing DKIM signature with `d=examplehq.com` align. A passing signature from an unrelated provider domain does not. Check both identity and result.
 
-Start an unassessed domain with monitoring and a real reporting destination:
+For Workspace, follow [Google’s DMARC setup steps](https://knowledge.workspace.google.com/admin/security/set-up-dmarc). Start with monitoring and a real reporting destination:
 
 ```dns
 _dmarc.examplehq.com. 3600 IN TXT "v=DMARC1; p=none; rua=mailto:dmarc@examplehq.com"
 ```
 
-`p=none` requests no DMARC-driven enforcement; `quarantine` requests suspicious treatment; `reject` requests rejection of DMARC failures. None promises inbox placement, and receivers apply their own handling policies. [DMARC policy background](https://www.rfc-editor.org/rfc/rfc7489.html#section-6).
+`p=none` requests no DMARC-driven enforcement; `quarantine` requests suspicious treatment; `reject` requests rejection of DMARC failures. None promises inbox placement, and receivers apply their own handling policies.
 
-**2026 update:** RFC 9989 replaces the earlier DMARC specification. It removes the `pct` tag and introduces `t` testing semantics and DNS Tree Walk discovery. Do not rely on `pct=10` as a universal enforcement safety valve, or assume legacy receivers understand `t=y`. A legacy receiver can ignore `t` in `p=reject; t=y` and still apply rejection. [Current DMARC specification](https://www.rfc-editor.org/rfc/rfc9989.html#appendix-C).
+Start with `p=none` while you check the setup. Avoid relying on percentage or testing flags to make a strict policy safe: receivers can handle them differently. In particular, `p=reject; t=y` can still lead to rejection if the receiver ignores the testing flag.
 
-Review all authorized senders before strengthening policy, including sales tools and representatives' ordinary correspondence. The current standard advises against `p=reject` for general-purpose email domains because forwarding and mailing lists can break authentication; domains publishing reject must use valid DKIM, not rely on SPF alone. Choose policy for the domain's actual use. [DMARC interoperability considerations](https://www.rfc-editor.org/rfc/rfc9989.html#section-7.4).
+Review every authorized sender before strengthening the policy, including sales tools and representatives' ordinary correspondence. Be careful with `p=reject` on a domain used for general correspondence: forwarding and mailing lists can break authentication. Use valid DKIM rather than relying on SPF alone, and test the routes your team actually uses before tightening the policy.
 
-Assign someone to review aggregate reports. Reports show authentication observations, not inbox placement. External reporting services may need DNS authorization. Failure reports requested with `ruf` can expose message information; they are not mandatory for a basic deployment. [Aggregate reporting](https://www.rfc-editor.org/rfc/rfc9990.html), [failure reporting](https://www.rfc-editor.org/rfc/rfc9991.html).
+Assign someone to review aggregate reports. Reports show authentication observations, not inbox placement. External reporting services may need DNS authorization. Failure reports requested with `ruf` can expose message information; they are not mandatory for a basic deployment.
 
 ##### Other records
 
 Working MX records matter because prospects need to reply. An outbound account that sends successfully but cannot receive a response is an incomplete sales setup. Test incoming replies from outside your organization, including messages to the exact address used in the sequence.
 
-For a self-operated sending server, verify matching forward and reverse DNS and SMTP TLS. With a hosted mailbox service, the provider normally manages the sending servers; ask support about the actual failing IP rather than adding a PTR record to an unrelated web server. [Gmail infrastructure requirements](https://support.google.com/mail/answer/81126).
+For a self-operated sending server, verify matching forward and reverse DNS and SMTP TLS. With a hosted mailbox service, the provider normally manages the sending servers; ask support about the actual failing IP rather than adding a PTR record to an unrelated web server.
 
-MTA-STS protects delivery **to** your domain by publishing an inbound transport policy; it does not automatically improve outbound prospecting. TLS-RPT reports transport failures from supporting senders. Configure these with your receiving provider, initially testing the policy and certificate setup. [MTA-STS](https://www.rfc-editor.org/rfc/rfc8461.html), [TLS reporting](https://www.rfc-editor.org/rfc/rfc8460.html).
+MTA-STS protects delivery **to** your domain by publishing an inbound transport policy; it does not automatically improve outbound prospecting. TLS-RPT reports transport failures from supporting senders. Configure these with your receiving provider, initially testing the policy and certificate setup.
 
-BIMI can display a brand logo in participating clients when their requirements are met. It is optional for a sales mailbox and does not buy inbox placement. Gmail supports qualifying VMC or CMC certificates; verify current eligibility before purchasing. [Google BIMI setup](https://support.google.com/a/answer/10911320).
+BIMI can display a brand logo in participating clients when their requirements are met. It is optional for a sales mailbox and does not buy inbox placement. Gmail supports qualifying VMC or CMC certificates; verify current eligibility before purchasing.
 
 #### Redirects
 
@@ -174,7 +176,7 @@ When in doubt, start with Workspace. If your team already works in Microsoft 365
 
 Before connecting a sales tool, check its supported authorization method, reply synchronization, bounce handling, and opt-out behavior. Confirm that the subscription and account remain under your company's control, including when a reseller supplies the mailbox.
 
-Provider terms still apply. Google prohibits unsolicited mass email and attempts to evade filtering; a paid subscription does not exempt a campaign from that policy. [Google Workspace acceptable-use policy](https://workspace.google.com/terms/use_policy/). Microsoft treats bulk sending as unsupported except on a best-effort basis and can restrict users or organizations through its outbound controls. [Microsoft outbound protection](https://learn.microsoft.com/en-us/defender-office-365/outbound-spam-protection-about).
+Provider terms still apply. Google’s [acceptable-use policy](https://workspace.google.com/terms/use_policy/) prohibits unsolicited mass email and attempts to evade filtering; a paid subscription does not exempt a campaign from that policy. Microsoft treats bulk sending as unsupported except on a best-effort basis and can restrict users or organizations through its outbound controls.
 
 For the person-to-person sales workflow in this guide, we prefer real mailboxes over starting with an ESP such as SendGrid or SES. Check any service's policy against your intended outreach before purchasing. This preference does not mean an ESP automatically lands in Promotions, or that a Workspace mailbox automatically lands in Primary.
 
@@ -204,11 +206,11 @@ Count follow-ups in the budget, not just first touches. For example, 15 new pros
 
 Configure the cap in the sending tool and check that overlapping campaigns share it. Avoid a queue burst after a weekend, pause, or reconnection. Spreading messages through the working day is a useful operational habit; a 10–30 minute interval can be a starting setting when it fits your schedule. It is not a technical requirement or a way to guarantee that automation looks human.
 
-Keep three sets of limits in view: your internal campaign cap, the mailbox provider's quota, and any tenant-wide restriction. Google Workspace uses rolling 24-hour limits that vary by account status and sending method. Its published ceilings are not cold-outbound targets. [Workspace sending limits](https://knowledge.workspace.google.com/admin/gmail/gmail-sending-limits-in-google-workspace).
+Keep three sets of limits in view: your internal campaign cap, the mailbox provider's quota, and any tenant-wide restriction. Google Workspace’s [sending limits](https://knowledge.workspace.google.com/admin/gmail/gmail-sending-limits-in-google-workspace) use rolling 24-hour windows that vary by account status and sending method. Its published ceilings are not cold-outbound targets.
 
-Exchange Online applies both user-level and tenant-level constraints. Its Tenant External Recipient Rate Limit covers external recipients across a sliding 24-hour window; adding mailboxes does not remove that shared constraint. [Exchange Online limits](https://learn.microsoft.com/en-us/office365/servicedescriptions/exchange-online-service-description/exchange-online-limits).
+[Exchange Online limits](https://learn.microsoft.com/en-us/office365/servicedescriptions/exchange-online-service-description/exchange-online-limits) apply at both user and tenant level. Its Tenant External Recipient Rate Limit covers external recipients across a sliding 24-hour window; adding mailboxes does not remove that shared constraint.
 
-**2026 correction:** Microsoft canceled the previously announced per-mailbox External Recipient Rate Limit indefinitely in January 2026. That canceled plan is separate from the tenant-wide limit. [Microsoft's cancellation announcement](https://techcommunity.microsoft.com/blog/exchange/exchange-online-canceling-the-mailbox-external-recipient-rate-limit/4483498).
+Check the limits shown for your own tenant before adding accounts. Older articles may describe a planned per-mailbox external-recipient limit that Microsoft canceled; that is separate from the tenant-wide restriction.
 
 As you find message-market fit, you can review mailbox counts and daily caps. Look at positive replies, invalid-address failures, opt-outs, complaints where available, and deferrals by receiving provider. Increase gradually after a stable period; hold or reduce volume when those signals deteriorate. If you add domains and mailboxes, apply the same authentication, ownership, and suppression checks rather than treating expansion as a substitute for fixing a weak campaign.
 
@@ -223,7 +225,7 @@ As you find message-market fit, you can review mailbox counts and daily caps. Lo
 
 Email warming gradually builds activity on a new or existing mailbox before and alongside cold outbound sales. Most warming tools exchange messages and replies between participating accounts. This is different from gradually increasing your actual prospect outreach: keep both streams visible so you know what is happening in each.
 
-The goal is to introduce activity gradually and establish a consistent sending pattern. Google also recommends increasing volume slowly, avoiding bursts, and monitoring delivery errors and complaints. [Google sending practices](https://support.google.com/mail/answer/81126?hl=en)
+The goal is to introduce activity gradually and establish a consistent sending pattern. Increase slowly, avoid bursts, and watch delivery errors and complaints as you go.
 
 A warming tool's score is useful within its test network, but real prospect delivery and replies remain the results that matter for your sales campaign.
 
@@ -233,7 +235,7 @@ Our recommendation is to continue warming both fresh mailboxes and mailboxes alr
 
 Some deliverability practitioners recommend against automated warming, while others continue to use it successfully. Our working approach is to keep it running and evaluate it against actual campaign performance. Revisit the setup if the service causes account warnings, unexpected traffic, or poorer results.
 
-Keep warming traffic separate in your reporting. Review actual prospect replies, bounces, delivery errors, and stop requests by mailbox and recipient provider. Check the permissions a warming service requests, how it handles mailbox data, and how to disconnect it. Confirm that your use of the tool and outreach program fits your mailbox provider's terms. [Google acceptable-use policy](https://workspace.google.com/terms/use_policy/), [Microsoft service policies](https://www.microsoft.com/en/DigitalSafety/policies)
+Keep warming traffic separate in your reporting. Review actual prospect replies, bounces, delivery errors, and stop requests by mailbox and recipient provider. Check the permissions a warming service requests, how it handles mailbox data, and how to disconnect it. Confirm that your use of the tool and outreach program fits your mailbox provider's terms.
 
 ### For new mailboxes
 
@@ -250,7 +252,7 @@ In the beginning, we use a warming reply setting of 30–50%, then lower it afte
 
 These numbers are a starting setup, not a promise that every new mailbox will be ready on day 14. Check received test-message headers for SPF, DKIM, and DMARC, and confirm that replies reach the right salesperson before launching an outreach sequence.
 
-Budget for all sending activity: warming messages, new prospect messages, follow-ups, and manually sent replies. A tool's “daily cap” might cover only its own sends. Published provider limits are account ceilings, not recommended cold-email volumes; accounts can also face restrictions related to spam or other abuse signals. [Google sending limits](https://knowledge.workspace.google.com/admin/gmail/gmail-sending-limits-in-google-workspace), [Microsoft outbound protection](https://learn.microsoft.com/en-us/defender-office-365/outbound-spam-protection-about)
+Budget for all sending activity: warming messages, new prospect messages, follow-ups, and manually sent replies. A tool's “daily cap” might cover only its own sends. Published provider limits are account ceilings, not recommended cold-email volumes; accounts can also face restrictions related to spam or other abuse signals.
 
 ### Randomization is important
 
@@ -260,7 +262,7 @@ Vary the timing too, rather than sending the day's activity in one burst. Many w
 
 For actual cold outreach, schedule around the prospect's working day and your team's ability to handle responses. Small timing changes are part of this playbook; they do not guarantee inbox placement. When a provider starts deferring messages, reduce the affected traffic instead of trying to solve the problem by changing the randomization settings.
 
-Google recommends reducing volume when bounces or deferrals appear. [Google sending practices](https://support.google.com/mail/answer/81126?hl=en)
+If bounces or deferrals increase, reduce volume and check the affected mailbox before continuing the ramp.
 
 ### After ramping up
 
@@ -281,7 +283,7 @@ Replies, genuine conversations, and recipients deliberately keeping your email a
 
 Separate positive replies, objections, referrals, automated replies, and opt-outs in your reporting. A warming reply percentage and a qualified prospect response rate answer different questions. Neither should obscure a rise in delivery failures or complaints.
 
-Make it easy for prospects to say no and honor that across every salesperson and sending tool. Remove queued follow-ups when someone opts out. An unsubscribe is useful feedback and can prevent another unwanted message from becoming a spam complaint. [Google unsubscribe guidance](https://support.google.com/mail/answer/14229414?hl=en), [Yahoo requirements](https://senders.yahooinc.com/best-practices/)
+Make it easy for prospects to say no and honor that across every salesperson and sending tool. Remove queued follow-ups when someone opts out. An unsubscribe is useful feedback and can prevent another unwanted message from becoming a spam complaint.
 
 
 ## Content
@@ -318,13 +320,13 @@ As a practical starting point, use plain text or very simple HTML, few links, an
 
 Write concrete claims and qualify them honestly. “We reduced deployment approval time in this documented case study” is stronger than “guaranteed risk-free results,” provided the case study exists and matches the claim. Avoid shouting, excessive punctuation, and fake urgency because they make an unsolicited pitch harder to trust.
 
-A content checker can help catch overhyped phrases before sending. Use it as an editing aid alongside a human review of tone, claims, and relevance. Keep normal sentence case, limit exclamation marks, and avoid wording that makes an ordinary sales offer sound like a scam. Review the sender identity, destination links, audience, and complaints as well as copy. The FTC specifically prohibits misleading subjects and headers in US commercial email, including B2B messages. [FTC CAN-SPAM guide](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business).
+A content checker can help catch overhyped phrases before sending. Use it as an editing aid alongside a human review of tone, claims, and relevance. Keep normal sentence case, limit exclamation marks, and avoid wording that makes an ordinary sales offer sound like a scam. Review the sender identity, destination links, audience, and complaints as well as copy. The FTC specifically prohibits misleading subjects and headers in US commercial email, including B2B messages.
 
 #### Images
 
 Start your first cold email without images unless one adds clear value. A relevant screenshot can be useful later when it explains a concrete observation. Keep the pitch understandable with images disabled, and avoid an image-only message. Do not insert a personalized screenshot that exposes another customer's data or implies access you do not have.
 
-Give informative images useful alternative text and decorative images an empty `alt=""`; keep essential claims in real text. This is an accessibility practice, not proof of inbox placement. [W3C image guidance](https://www.w3.org/WAI/tutorials/images/). Check mobile rendering, enlarged text, and dark mode; use semantic structure and descriptive links. [Litmus email-accessibility guidance](https://www.litmus.com/blog/ultimate-guide-accessible-emails).
+Give informative images useful alternative text and decorative images an empty `alt=""`; keep essential claims in real text. The message should still make sense when the images do not load. Check mobile rendering, enlarged text, and dark mode; use semantic structure and descriptive links.
 
 Changing a tracking pixel's dimensions does not turn it into a non-tracking image or solve privacy obligations. Decide whether tracking is needed separately from whether a screenshot is useful.
 
@@ -334,7 +336,7 @@ Keep links to a minimum in the first email; a reply-based call to action often n
 
 If the first call to action is simply a reply, a calendar link may be unnecessary until the prospect expresses interest. Do not publish their name, email address, or employer in a personalized URL slug just to measure engagement. Use an opaque identifier when an identifier is necessary, and apply an appropriate retention policy.
 
-Click-tracking systems can rewrite links through a redirect service; that introduces another destination to test and maintain. [Mailgun click-tracking documentation](https://documentation.mailgun.com/docs/mailgun/user-manual/tracking-messages/tracking-clicks). A branded tracking domain improves recognizability but does not guarantee trust or inbox placement.
+Click-tracking systems can rewrite links through a redirect service; that introduces another destination to test and maintain. A branded tracking domain improves recognizability but does not guarantee trust or inbox placement.
 
 #### Attachments
 
@@ -358,7 +360,7 @@ Stop the sequence when a person replies, then classify the response. A positive 
 
 Synchronize suppression across the CRM, sequencing tool, manual outreach workflow, agents, and alternate mailboxes. Check it again immediately before dispatch, not only when importing a prospect. An agency handoff or a fresh data-vendor export must not revive a suppressed contact. Preserve the scope, date, and source of the request with appropriate access and retention controls.
 
-Provider requirements can exceed legal minimums. Gmail requires compliant one-click unsubscribe for applicable bulk marketing traffic; a body link or reply-based opt-out alone is not the RFC 8058 mechanism. [Gmail sender FAQ](https://support.google.com/mail/answer/14229414?hl=en). Whether a campaign is called “sales” does not by itself exempt it from marketing rules.
+Provider requirements can exceed legal minimums. Gmail requires compliant one-click unsubscribe for applicable bulk marketing traffic; a body link or reply-based opt-out alone is not the RFC 8058 mechanism. Whether a campaign is called “sales” does not by itself exempt it from marketing rules.
 
 If your sending program needs one-click unsubscribe, confirm that the sales platform can supply these headers and process the request:
 
@@ -367,7 +369,7 @@ List-Unsubscribe: <https://sales.example.com/unsubscribe/OPAQUE_TOKEN>
 List-Unsubscribe-Post: List-Unsubscribe=One-Click
 ```
 
-The receiving provider sends an HTTPS POST containing `List-Unsubscribe=One-Click`. The endpoint must work without login, cookies, or another confirmation, and must not redirect that POST. Support both form-encoded and multipart submissions. Both headers must be covered by a valid DKIM signature. Use a hard-to-forge token identifying the recipient and list. [RFC 8058](https://www.rfc-editor.org/rfc/rfc8058)
+The receiving provider sends an HTTPS POST containing `List-Unsubscribe=One-Click`. The endpoint must work without login, cookies, or another confirmation, and must not redirect that POST. Support both form-encoded and multipart submissions. Both headers must be covered by a valid DKIM signature. Use a hard-to-forge token identifying the recipient and list.
 
 For privacy, we recommend an opaque token instead of a readable prospect address in the URL. If your platform operates this endpoint, ask how it propagates the opt-out to other campaigns and mailboxes. Test a real unsubscribe, then verify that the next scheduled touch is suppressed. If you implement it, make repeated POSTs safe and keep ordinary GET requests from silently unsubscribing people when security scanners follow links. Ensure firewall challenges do not block the receiving provider's request. Keep the visible body opt-out useful even when the mailbox client does not display its own unsubscribe button.
 
@@ -375,11 +377,11 @@ For cold B2B outreach, check jurisdiction and subscriber type rather than assumi
 
 | Location | Questions to resolve before outreach |
 | --- | --- |
-| United States | CAN-SPAM applies to commercial B2B email; verify truthful identity and subject, required disclosures and postal address, and opt-out handling. Honor opt-outs within 10 business days at the latest, with faster operational suppression. [FTC guide](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) |
-| United Kingdom | PECR's email consent rules differ for corporate subscribers versus sole traders and certain partnerships. Using a named business contact's personal data also engages data-protection duties. A business-looking address alone does not settle the classification. [ICO B2B guidance](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/business-to-business-marketing/) |
-| European Union | Review the relevant national implementation of ePrivacy Article 13 alongside GDPR, including treatment of corporate recipients. A legitimate-interest argument does not by itself settle permission to send electronic marketing. [ePrivacy Directive](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219) |
-| Canada | CASL's express or implied consent requirements have specific conditions. A conspicuously published business address is not blanket permission; relevance to the recipient's role and other conditions matter. [CRTC consent guidance](https://crtc.gc.ca/eng/com500/guide.htm) |
-| Australia | Check consent, sender identification, and unsubscribe requirements. ACMA requires honoring opt-outs within five working days and says an unsolicited marketing message asking for consent is not a workaround. [ACMA guidance](https://www.acma.gov.au/avoid-sending-spam) |
+| United States | [CAN-SPAM](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) applies to commercial B2B email; verify truthful identity and subject, required disclosures and postal address, and opt-out handling. Honor opt-outs within 10 business days at the latest, with faster operational suppression. |
+| United Kingdom | [PECR’s B2B email rules](https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/business-to-business-marketing/) differ for corporate subscribers versus sole traders and certain partnerships. Using a named business contact's personal data also engages data-protection duties. A business-looking address alone does not settle the classification. |
+| European Union | Review the relevant national implementation of ePrivacy Article 13 alongside GDPR, including treatment of corporate recipients. A legitimate-interest argument does not by itself settle permission to send electronic marketing. |
+| Canada | [CASL’s consent requirements](https://crtc.gc.ca/eng/com500/guide.htm) have specific conditions. A conspicuously published business address is not blanket permission; relevance to the recipient's role and other conditions matter. |
+| Australia | Check [ACMA’s requirements](https://www.acma.gov.au/avoid-sending-spam) for consent, sender identification, and unsubscribe. ACMA requires honoring opt-outs within five working days and says an unsolicited marketing message asking for consent is not a workaround. |
 
 This table is a starting point for reviewing the campaign, not a complete legal assessment. Separately check the sending provider's acceptable-use policy and receiving-provider expectations: legal eligibility does not guarantee platform permission or acceptance.
 
@@ -393,11 +395,11 @@ Test subjects together with the audience and proposition they describe. Optimize
 
 For cold outbound, start by deciding what action the data will change. Replies, meetings, opt-outs, failures, and account progression often answer more useful questions than a per-person open timestamp. Do not enable every tracker merely because the sequencing platform offers it.
 
-Open tracking records an image request. Apple Mail Privacy Protection may fetch and cache the image without a person reading the email, including for Gmail or business accounts read in Apple Mail. Image blocking can hide real reading. [Postmark's explanation of Apple privacy and open tracking](https://postmarkapp.com/blog/how-apples-mail-privacy-changes-affect-email-open-tracking). Never send “I saw you opened my email” based on this signal, and do not accelerate a sequence just because the pixel fired.
+Open tracking records an image request. Apple Mail Privacy Protection may fetch and cache the image without a person reading the email, including for Gmail or business accounts read in Apple Mail. Image blocking can hide real reading. Never send “I saw you opened my email” based on this signal, and do not accelerate a sequence just because the pixel fired.
 
-Clicks can also come from security scanners. Mailgun documents automated open/click detection and explains that an empty bot field means no bot was detected, not that a human was proven. [Mailgun bot-detection documentation](https://documentation.mailgun.com/docs/mailgun/user-manual/tracking-messages/open-click-bot-detect). Check patterns such as every link being visited seconds after acceptance; avoid automatically classifying those prospects as interested.
+Clicks can also come from security scanners. If your tool flags automated activity, use that information, but do not assume every unflagged click came from a person. Check patterns such as every link being visited seconds after acceptance; avoid automatically classifying those prospects as interested.
 
-Choose tracking settings by campaign and jurisdiction, minimize collected data, and document retention. France's CNIL published final email-pixel recommendations in April 2026 and a follow-up FAQ in July. Exemptions for particular requested-service uses are narrowly conditioned; do not assume they authorize tracking every cold prospect. [CNIL recommendations](https://www.cnil.fr/fr/recommandation-pixel-suivi-courriels), [CNIL FAQ](https://www.cnil.fr/fr/faq-recommandation-pixels-courriers-electroniques).
+Choose tracking settings by campaign and jurisdiction, minimize collected data, and document retention. Permission to send a message and permission to track the recipient are separate questions. Do not assume an exemption for measuring a requested service also covers tracking cold prospects.
 
 Disabling pixels does not guarantee inbox placement either. Test a practical tracking policy against the quality of your decisions and conversations, with privacy requirements resolved first.
 
@@ -411,7 +413,7 @@ Define the account criteria before collecting addresses: business model, geograp
 
 Use one accountable owner per account and a shared contact history. Set documented contact and account caps across all sales tools; choose them for the audience and program rather than adopting a claimed universally safe number. Review small cohorts manually before expanding them. When replies repeatedly say “wrong person,” fix the role selection instead of sending more follow-ups.
 
-Data vendors can supply contact records; they cannot remove your obligation to assess provenance, accuracy, applicable law, and provider policy. Spamhaus treats unsolicited bulk email as spam and warns about scraped lists, fake engagement, and infrastructure used to evade filtering. That is a filtering-policy reality distinct from whether a particular B2B message is lawful in a jurisdiction. [Spamhaus's cold-email analysis](https://www.spamhaus.org/resource-hub/spam/spamhaus-take-on-cold-emailing-aka-spam/).
+Treat a data vendor as a source of leads, not a substitute for knowing your audience. Check where the records came from, how fresh they are, and whether the people match your target profile. A list that is technically valid can still produce poor replies and complaints. Check the rules that apply to your campaign before sending.
 
 #### Buying intent
 
@@ -425,11 +427,11 @@ Compare intent-selected accounts against otherwise comparable accounts using pos
 
 Verification reduces avoidable addressing errors; it does not prove inbox placement, interest, or consent. Keep valid, invalid, accept-all, and unknown results separate. Recheck stale records before a new campaign, but do not repeatedly probe or mail unknown addresses to force a verdict.
 
-Check syntax and domain configuration with a maintained parser. A missing MX can fall back to address records; `MX 0 .` explicitly says the domain accepts no email. A DNS timeout is not proof that a domain is nonexistent. [RFC 7505](https://datatracker.ietf.org/doc/html/rfc7505).
+Check syntax and domain configuration with a maintained parser. A missing MX can fall back to address records; `MX 0 .` explicitly says the domain accepts no email. A DNS timeout is not proof that a domain is nonexistent.
 
-Offer typo corrections for confirmation rather than silently changing the recipient. Do not universally strip dots or `+tags`; even Google's own dot-equivalence behavior differs between consumer Gmail and organizational domains. [Google address guidance](https://support.google.com/mail/answer/7436150?hl=en). Check international-address support in the sending platform instead of declaring all non-ASCII addresses invalid. [SMTPUTF8 standard](https://datatracker.ietf.org/doc/html/rfc6531).
+Offer typo corrections for confirmation rather than silently changing the recipient. Do not universally strip dots or `+tags`; even Google's own dot-equivalence behavior differs between consumer Gmail and organizational domains. Check international-address support in the sending platform instead of declaring all non-ASCII addresses invalid.
 
-Preserve full bounce diagnostics. `550 5.1.1` indicates an invalid destination mailbox, while `550 5.7.1` indicates an authorization or policy refusal. Both are permanent failures for the attempt, but only the former establishes that particular mailbox problem. Suppress confirmed invalid addresses and investigate policy failures without marking the entire prospect list invalid. [IANA enhanced-status registry](https://www.iana.org/assignments/smtp-enhanced-status-codes).
+Preserve full bounce diagnostics. `550 5.1.1` indicates an invalid destination mailbox, while `550 5.7.1` indicates an authorization or policy refusal. Both are permanent failures for the attempt, but only the former establishes that particular mailbox problem. Suppress confirmed invalid addresses and investigate policy failures without marking the entire prospect list invalid.
 
 ### Scheduling
 
@@ -451,7 +453,7 @@ If a receiving provider temporarily defers traffic, let the sending system follo
 
 ## Metrics
 
-Measure the path from valid attempt to useful sales conversation. An ESP's “delivered” status normally means the recipient server accepted the message, not that it reached the inbox. [Postmark delivery-status explanation](https://postmarkapp.com/support/article/1267-why-didn-t-this-recipient-receive-my-message).
+Measure the path from valid attempt to useful sales conversation. An ESP's “delivered” status normally means the recipient server accepted the message, not that it reached the inbox.
 
 | Metric | Suggested definition or interpretation |
 | --- | --- |
@@ -470,25 +472,25 @@ For example, 10 positive replies among 500 contacted prospects is 2%, even if 40
 
 Break down results by audience segment, acquisition source, sender, domain, receiving provider, sequence step, and copy variant. Count unique people and accounts alongside messages. More follow-ups can inflate total replies while wasting contacts or harming reputation; compare incremental useful outcomes and negative responses at each step.
 
-Complaint visibility is incomplete. Mailgun notes that Gmail complaint data is not provided through its individual feedback-loop events and directs senders to Google Postmaster Tools. Zero complaints in a sequencing dashboard is therefore not proof of zero complaints. [Mailgun metric definitions](https://documentation.mailgun.com/docs/mailgun/user-manual/reporting/metric-definitions). Keep provider-defined rates distinct from your own formulas.
+Complaint visibility is incomplete. Gmail complaints will not necessarily appear as individual events in your sequencing tool; check Google Postmaster Tools as well. Zero complaints in a sequencing dashboard is therefore not proof of zero complaints. Keep provider-defined rates distinct from your own formulas.
 
 Use seed inboxes and placement tests to investigate, not to promise a percentage for real prospects. A clean blocklist check and passing authentication also do not guarantee inbox placement. Before expanding a campaign, review its positive outcomes, negative signals, address quality, and provider-level failures together. When results deteriorate, pause the affected cohort, preserve diagnostics, and investigate the recent change instead of adding mailboxes or rewriting random words.
 
 ### Google Postmaster Tools and provider feedback
 
-Add and verify your sending domains in [Google Postmaster Tools](https://postmaster.google.com/). Low-volume cold-email programs may not generate enough data for every dashboard; missing data does not establish that a mailbox is healthy. Google's setup documentation explains its privacy-related reporting limits. [Postmaster setup](https://support.google.com/mail/answer/9981691?hl=en)
+Add and verify your sending domains in [Google Postmaster Tools](https://postmaster.google.com/). Low-volume cold-email programs may not generate enough data for every dashboard; missing data does not establish that a mailbox is healthy. Use the data available alongside your actual campaign results.
 
-Google recommends keeping the user-reported spam rate below 0.1% and avoiding 0.3% or higher. Treat these as limits to stay well away from, not an allowance for complaints. [Gmail sender guidelines](https://support.google.com/mail/answer/81126?hl=en) Its spam dashboard reflects reports on mail reaching engaged recipients' inboxes; messages automatically filtered into spam are not represented in the same way. A low displayed rate can coexist with poor placement. [Dashboard definitions](https://support.google.com/mail/answer/14668346?hl=en)
+[Google’s sender guidelines](https://support.google.com/mail/answer/81126?hl=en) recommend keeping the user-reported spam rate below 0.1% and avoiding 0.3% or higher. Treat these as limits to stay well away from, not an allowance for complaints. Its spam dashboard reflects reports on mail reaching engaged recipients' inboxes; messages automatically filtered into spam are not represented in the same way. A low displayed rate can coexist with poor placement.
 
-**2026 monitoring update:** Google's current notice says retirement of the legacy web interface is postponed; the v2 API is available and existing API integrations need migration. The newer API omits the old domain/IP reputation features. Check which version a third-party dashboard uses before assuming a missing chart means your reputation improved or worsened. [Google transition notice](https://support.google.com/mail/answer/16594218?hl=en)
+If you use a third-party Postmaster dashboard, check that its integration still works and which metrics it supports. Different API versions expose different information; a missing reputation chart does not necessarily mean your reputation changed.
 
-Yahoo's Complaint Feedback Loop uses the DKIM signing domain. Ask your sending provider whether it already enrolls and processes complaints for your domain. Do not assume a sales sequencer receives every complaint. [Yahoo CFL](https://senders.yahooinc.com/complaint-feedback-loop/)
+Yahoo’s [Complaint Feedback Loop](https://senders.yahooinc.com/complaint-feedback-loop/) uses the DKIM signing domain. Ask your sending provider whether it already enrolls and processes complaints for your domain. Do not assume a sales sequencer receives every complaint.
 
-Microsoft's SNDS reports on sending IPs and requires authorization. With hosted mailboxes, your provider normally controls that infrastructure; ask what information and escalation support it can provide. [SNDS FAQ](https://substrate.office.com/ip-domain-management-snds/snds/faq) For teams that operate eligible IPs, the portal's July 2026 announcement says legacy automated URLs were deprecated in June and trap-hit counts were removed in July. Update old monitoring integrations rather than reading missing data as zero. [SNDS announcements](https://substrate.office.com/ip-domain-management-snds/snds)
+Microsoft’s [SNDS portal](https://substrate.office.com/ip-domain-management-snds/snds) reports on sending IPs and requires authorization. With hosted mailboxes, your provider normally controls that infrastructure; ask what information and escalation support it can provide. If your team collects SNDS data, keep the integration up to date. Legacy download links and trap-hit reports are no longer reliable inputs; missing data should not be read as zero.
 
 ### Bounces, deferrals, and retry decisions
 
-Save the full SMTP response, not just the sequencing tool's “bounced” label. A `4xx` response is temporary; a `5xx` response is permanent for the attempted transaction. Do not automatically keep retrying an unchanged permanent rejection. A permanent policy rejection is not the same as an invalid prospect address. [SMTP reply semantics](https://datatracker.ietf.org/doc/html/rfc5321#section-4.2.1)
+Save the full SMTP response, not just the sequencing tool's “bounced” label. A `4xx` response is temporary; a `5xx` response is permanent for the attempted transaction. Do not automatically keep retrying an unchanged permanent rejection. A permanent policy rejection is not the same as an invalid prospect address.
 
 | What you observe | What to do next |
 | --- | --- |

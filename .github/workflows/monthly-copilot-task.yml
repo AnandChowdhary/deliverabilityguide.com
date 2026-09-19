@@ -26,12 +26,10 @@ jobs:
           fi
 
           prompt_json=$(jq -Rs . < tasks/monthly.md)
-          auth_header=$(printf "Authorization: ******" "$COPILOT_TOKEN")
-
           curl --fail-with-body \
             --request POST \
             --url "https://api.github.com/agents/repos/${{ github.repository }}/tasks" \
+            --oauth2-bearer "$COPILOT_TOKEN" \
             --header "Accept: application/vnd.github+json" \
-            --header "$auth_header" \
             --header "X-GitHub-Api-Version: 2022-11-28" \
             --data "{\"prompt\":${prompt_json},\"base_ref\":\"main\",\"create_pull_request\":true}"
